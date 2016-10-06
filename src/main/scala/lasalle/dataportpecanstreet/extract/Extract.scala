@@ -1,11 +1,13 @@
 package lasalle.dataportpecanstreet.extract
 
 
-import java.sql.{Connection, ResultSet}
+import java.sql.{Connection, ResultSet, Timestamp}
+import java.util.{Calendar, Date}
 
 import lasalle.dataportpecanstreet.Config
 
 import scala.annotation.tailrec
+import scala.collection.mutable.ListBuffer
 import scala.util.{Failure, Success, Try}
 
 
@@ -35,6 +37,8 @@ object Extract {
       retrieveTableData(tablesColumnMetadata.head, connection)
 
       //iterateOverResultSet(resultSet, List(), (r, _: List[Any]) => { println(r.getTimestamp("localhour")); List() })
+
+      connection.close()
     }
   }
 
@@ -94,7 +98,7 @@ object Extract {
 
     def guessTimeColumn(columns: Iterable[String]): Option[String] = columns.find(_.startsWith("local"))
 
-    def retrieveStartTime(table: String, timeColumn: String): Option[Any] = {
+    def retrieveStartTime(table: String, timeColumn: String): Option[Timestamp] = {
 
       val startTimeQuery =
         s"select * " +
@@ -106,7 +110,7 @@ object Extract {
 
     }
 
-    def retrieveEndTime(table: String, timeColumn: String): Option[Any] = {
+    def retrieveEndTime(table: String, timeColumn: String): Option[Timestamp] = {
 
       val endTimeQuery =
         s"select * " +
@@ -118,15 +122,27 @@ object Extract {
 
     }
 
-    for {
-      timeColumn <- guessTimeColumn(tableMetadata.metadata)
-      startTime <- retrieveStartTime(tableMetadata.table, timeColumn)
-      endTime <- retrieveEndTime(tableMetadata.table, timeColumn)
-    } yield {
-      println(timeColumn)
-      println(startTime)
-      println(endTime)
+    def convertToCalendarDate(t: Timestamp) = {
+      val c = Calendar.getInstance()
+      c.setTime(new Date(t.getTime))
+      c
     }
+
+    (for {
+      timeColumn <- guessTimeColumn(tableMetadata.metadata)
+      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(convertToCalendarDate)
+      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(convertToCalendarDate)
+    } yield {
+      val timeSlices = ListBuffer[Calendar]()
+      timeSlices += startTime
+
+      while (timeSlices.last.compareTo(endTime) <= 0) {
+        val dateBetween = Calendar.getInstance()
+        dateBetween.setTime(timeSlices.last.getTime)
+        dateBetween.add(Calendar.MONTH, 1)
+        timeSlices += dateBetween
+      }
+    }).toList
 
     guessTimeColumn(tableMetadata.metadata) match {
       case None => None

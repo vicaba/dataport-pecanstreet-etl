@@ -1,4 +1,4 @@
-[info] Updating {file:/Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/}dataport-pecanstreet-etl-build...
+[info] Updating {file:/Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/}dataport-pecanstreet-etl-build...
 [debug] :: resolving dependencies :: default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT
 [debug] 	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool]
 [debug] 	validate = true
@@ -16,7 +16,7 @@
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT [provided]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)]
 [info] Resolving org.scala-lang#scala-library;2.10.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@65da9d15
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@7ba35c9a
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4
 [debug] 	found org.scala-lang#scala-library;2.10.4 in sbt-chain
 [debug] 	[2.10.4] org.scala-lang#scala-library;2.10.4
@@ -1766,19 +1766,19 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.8!apply-macro.jar
 [debug] 	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar
 [debug] 	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar
-[debug] :: resolution report :: resolve 2270ms :: artifacts dl 116ms
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT compile produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-compile.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT runtime produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-runtime.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT test produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-test.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT provided produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-provided.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT optional produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-optional.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT compile-internal produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-compile-internal.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT runtime-internal produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-runtime-internal.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT test-internal produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-test-internal.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT plugin produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-plugin.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT sources produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-sources.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT docs produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-docs.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT pom produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-pom.xml
-[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT scala-tool produced in /Users/vicaba/Projects/lasalle/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-scala-tool.xml
-[debug] 	resolve done (2270ms resolve - 116ms download)
+[debug] :: resolution report :: resolve 2142ms :: artifacts dl 57ms
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT compile produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-compile.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT runtime produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-runtime.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT test produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-test.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT provided produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-provided.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT optional produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-optional.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT compile-internal produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-compile-internal.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT runtime-internal produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-runtime-internal.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT test-internal produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-test-internal.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT plugin produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-plugin.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT sources produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-sources.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT docs produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-docs.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT pom produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-pom.xml
+[debug] 	report for default#dataport-pecanstreet-etl-build;0.1-SNAPSHOT scala-tool produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/project/target/resolution-cache/reports/default-dataport-pecanstreet-etl-build-scala-tool.xml
+[debug] 	resolve done (2142ms resolve - 57ms download)
 [info] Done updating.

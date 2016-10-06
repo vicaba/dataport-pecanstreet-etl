@@ -4,7 +4,7 @@
 		module="dataport-pecanstreet-etl_2.11"
 		revision="1.0"
 		status="integration"
-		publication="20161004130740"
+		publication="20161006152058"
 	>
 		<description>
 		dataport-pecanstreet-etl
@@ -36,5 +36,6 @@
 		<dependency org="org.scala-lang" name="scala-library" rev="2.11.8" conf="scala-tool->default,optional(default);compile->default(compile)"/>
 		<dependency org="org.postgresql" name="postgresql" rev="9.4.1211.jre7" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe" name="config" rev="1.3.1" conf="compile->default(compile)"/>
+		<dependency org="com.typesafe.play" name="play-json_2.11" rev="2.5.8" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>

@@ -4,7 +4,7 @@
 		module="dataport-pecanstreet-etl-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20161003173419"
+		publication="20161006152048"
 		e:sbtVersion="0.13" e:scalaVersion="2.10"
 	>
 		<description>
