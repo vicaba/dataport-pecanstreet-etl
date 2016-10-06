@@ -3,6 +3,8 @@ package lasalle.dataportpecanstreet.extract
 
 import java.sql.{Connection, ResultSet}
 
+import lasalle.dataportpecanstreet.Config
+
 import scala.annotation.tailrec
 import scala.util.{Failure, Success, Try}
 
@@ -28,10 +30,9 @@ object Extract {
       val tables = Set("electricity_egauge_hours", "electricity_egauge_15min", "electricity_egauge_minutes")
       tables.foreach(println)
       println(tables.count(_ => true))
-      val tableColumns = retrieveTableColumns(tables, connection)
-      println(tableColumns)
-
-
+      val tablesColumnMetadata = retrieveTableColumnMetadata(tables, connection)
+      println(tablesColumnMetadata)
+      retrieveTableData(tablesColumnMetadata.head, connection)
 
       //iterateOverResultSet(resultSet, List(), (r, _: List[Any]) => { println(r.getTimestamp("localhour")); List() })
     }
@@ -57,16 +58,15 @@ object Extract {
     }.getOrElse(Set())
   }
 
-  type TablesMetadata = Map[String, Iterable[String]]
 
-  def retrieveTableColumns(tableNames: Iterable[String], connection: Connection): TablesMetadata = {
+  def retrieveTableColumnMetadata(tableNames: Iterable[String], connection: Connection): Iterable[TableColumnMetadata] = {
 
     val ColumnNameColumn = "column_name"
 
     val tableColumnQuery = (table: String) =>
       s"select $ColumnNameColumn " +
         s"from information_schema.columns " +
-        s"where table_schema = 'university' and table_name = '${table}'"
+        s"where table_schema = '${Config.Server.schema}' and table_name = '${table}'"
 
     def tableColumnReader(resultSet: ResultSet, accum: Set[String]): Set[String] = {
       Try(resultSet.getString(ColumnNameColumn)) match {
@@ -81,48 +81,58 @@ object Extract {
       val statement = connection.createStatement()
 
       val resultSet = statement.executeQuery(tableColumnQuery(tableName))
-      tableName -> iterateOverResultSet(resultSet, Set[String](), tableColumnReader)
-    }.toMap
+      TableColumnMetadata(tableName, iterateOverResultSet(resultSet, Set[String](), tableColumnReader))
+    }
 
   }
 
-  case class TableMetadata(table: String, metadata: Iterable[String])
+  case class TableColumnMetadata(table: String, metadata: Iterable[String])
 
   case class TableData(table: String, tableData: Map[String, String])
 
-  def retrieveTableData(tableMetadata: TableMetadata, connection: Connection): Unit = {
-
-
-    val endTimeQuery = (table: String, timeColumn: String) =>
-      s"select * " +
-        s"from $table " +
-        s"order by $timeColumn DESC"
-
-
-    val tableDataQuery = (table: String) =>
-      s"select * " +
-        s"from $table " +
-        s"where "
+  def retrieveTableData(tableMetadata: TableColumnMetadata, connection: Connection): Unit = {
 
     def guessTimeColumn(columns: Iterable[String]): Option[String] = columns.find(_.startsWith("local"))
 
-    guessTimeColumn(tableMetadata.metadata) match {
-      case _ => None
-      case Some(column) =>
-    }
-
-    def retrieveStartTime(table: String, timeColumn: String): Unit = {
+    def retrieveStartTime(table: String, timeColumn: String): Option[Any] = {
 
       val startTimeQuery =
         s"select * " +
-          s"from $table " +
-          s"order by $timeColumn ASC"
-      
-      val statement = connection.createStatement()
-      val resultSet = statement.executeQuery(startTimeQuery)
+          s"from ${Config.Server.schema}.$table " +
+          s"order by $timeColumn ASC limit 1"
+
+      val resultSet = connection.createStatement().executeQuery(startTimeQuery)
+      if (resultSet.next()) Some(resultSet.getTimestamp(timeColumn)) else None
+
+    }
+
+    def retrieveEndTime(table: String, timeColumn: String): Option[Any] = {
+
+      val endTimeQuery =
+        s"select * " +
+          s"from ${Config.Server.schema}.$table " +
+          s"order by $timeColumn DESC limit 1"
+
+      val resultSet = connection.createStatement().executeQuery(endTimeQuery)
+      if (resultSet.next()) Some(resultSet.getTimestamp(timeColumn)) else None
+
+    }
+
+    for {
+      timeColumn <- guessTimeColumn(tableMetadata.metadata)
+      startTime <- retrieveStartTime(tableMetadata.table, timeColumn)
+      endTime <- retrieveEndTime(tableMetadata.table, timeColumn)
+    } yield {
+      println(timeColumn)
+      println(startTime)
+      println(endTime)
+    }
+
+    guessTimeColumn(tableMetadata.metadata) match {
+      case None => None
+      case Some(timeColumn) => retrieveStartTime(tableMetadata.table, timeColumn)
     }
 
   }
-
 
 }
