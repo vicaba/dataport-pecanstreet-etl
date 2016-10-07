@@ -5,6 +5,7 @@ import java.sql.{Connection, ResultSet, Timestamp}
 import java.util.{Calendar, Date}
 
 import lasalle.dataportpecanstreet.Config
+import lasalle.dataportpecanstreet.transform.Transform
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
@@ -34,7 +35,8 @@ object Extract {
       println(tables.count(_ => true))
       val tablesColumnMetadata = retrieveTableColumnMetadata(tables, connection)
       println(tablesColumnMetadata)
-      retrieveTableData(tablesColumnMetadata.head, connection)
+      val tableData = retrieveTableData(tablesColumnMetadata.head, connection)
+      Transform.dataRowsToJsonObject(tableData)
 
       //iterateOverResultSet(resultSet, List(), (r, _: List[Any]) => { println(r.getTimestamp("localhour")); List() })
 
@@ -92,9 +94,13 @@ object Extract {
 
   case class TableColumnMetadata(table: String, metadata: Iterable[String])
 
-  case class TableData(table: String, tableData: Map[String, String])
+  type DataRow = Map[String, String]
 
-  def retrieveTableData(tableMetadata: TableColumnMetadata, connection: Connection): Unit = {
+  type DataRows = List[DataRow]
+
+  case class TableData(table: String, tableData: DataRows)
+
+  def retrieveTableData(tableMetadata: TableColumnMetadata, connection: Connection): Option[TableData] = {
 
     def guessTimeColumn(columns: Iterable[String]): Option[String] = columns.find(_.startsWith("local"))
 
@@ -122,16 +128,22 @@ object Extract {
 
     }
 
-    def convertToCalendarDate(t: Timestamp) = {
+    def sqlTimestampToCalendarDate(t: Timestamp) = {
       val c = Calendar.getInstance()
       c.setTime(new Date(t.getTime))
       c
     }
 
-    (for {
+    def tableDataReader(resultSet: ResultSet, accum: DataRows): DataRows = {
+      accum :+ tableMetadata.metadata.map { field =>
+        field -> resultSet.getString(field)
+      }.toMap
+    }
+
+    for {
       timeColumn <- guessTimeColumn(tableMetadata.metadata)
-      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(convertToCalendarDate)
-      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(convertToCalendarDate)
+      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
+      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
     } yield {
       val timeSlices = ListBuffer[Calendar]()
       timeSlices += startTime
@@ -142,13 +154,27 @@ object Extract {
         dateBetween.add(Calendar.MONTH, 1)
         timeSlices += dateBetween
       }
-    }).toList
 
-    guessTimeColumn(tableMetadata.metadata) match {
-      case None => None
-      case Some(timeColumn) => retrieveStartTime(tableMetadata.table, timeColumn)
+      case class TimeRange(start: Calendar, end: Calendar)
+      val timeRanges = timeSlices.sliding(2).toList.map(l => TimeRange(l.head, l.last))
+
+      timeRanges.take(1).map { timeRange =>
+
+        val startDate = new java.sql.Date(timeRange.start.getTimeInMillis)
+        val endDate = new java.sql.Date(timeRange.end.getTimeInMillis)
+
+        val statement = connection.createStatement()
+
+        val query = s"select * " +
+          s"from ${Config.Server.schema}.${tableMetadata.table} " +
+          s"where $timeColumn between '$startDate' and '$endDate'"
+
+        val resultSet = statement.executeQuery(query)
+
+        iterateOverResultSet(resultSet, List[Map[String, String]](), tableDataReader)
+      }.map(TableData(tableMetadata.table, _))
+
     }
-
   }
 
 }
