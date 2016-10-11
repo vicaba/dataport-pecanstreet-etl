@@ -5,17 +5,23 @@ import java.sql.{Connection, ResultSet, Timestamp}
 import java.util.{Calendar, Date}
 
 import lasalle.dataportpecanstreet.Config
-import lasalle.dataportpecanstreet.transform.Transform
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
 import scala.util.{Failure, Success, Try}
 
 
-/**
-  * Read http://larsho.blogspot.com.es/2008/01/integrating-with-phpmysql-application.html
-  */
 object Extract {
+
+  case class TimeRange(start: Calendar, end: Calendar)
+
+  case class TableColumnMetadata(table: String, metadata: List[String])
+
+  type DataRow = Map[String, String]
+
+  type DataRows = List[DataRow]
+
+  case class TableData(table: String, tableData: DataRows)
 
   @tailrec
   def iterateOverResultSet[R](resultSet: ResultSet, accum: R, f: (ResultSet, R) => R): R = {
@@ -24,29 +30,9 @@ object Extract {
     } else accum
   }
 
-  def main(args: Array[String]): Unit = {
-    lasalle.dataportpecanstreet.Connection.connect().map { connection =>
-
-      val statement = connection.createStatement()
-      val query = "select * from university.electricity_egauge_hours limit 3"
-      val resultSet = statement.executeQuery(query)
-      val tables = Set("electricity_egauge_hours", "electricity_egauge_15min", "electricity_egauge_minutes")
-      tables.foreach(println)
-      println(tables.count(_ => true))
-      val tablesColumnMetadata = retrieveTableColumnMetadata(tables, connection)
-      println(tablesColumnMetadata)
-      val tableData = retrieveTableData(tablesColumnMetadata.head, connection)
-      Transform.dataRowsToJsonObject(tableData)
-
-      //iterateOverResultSet(resultSet, List(), (r, _: List[Any]) => { println(r.getTimestamp("localhour")); List() })
-
-      connection.close()
-    }
-  }
-
   def retrieveTableNames(connection: Connection): Set[String] = {
 
-    val TableNameColumn = "TABLE_NAME"
+    val TableNameColumn = "table_name"
 
     def tableReader(resultSet: ResultSet, accum: Set[String]): Set[String] = {
       Try(resultSet.getString(TableNameColumn)) match {
@@ -74,35 +60,27 @@ object Extract {
         s"from information_schema.columns " +
         s"where table_schema = '${Config.Server.schema}' and table_name = '${table}'"
 
-    def tableColumnReader(resultSet: ResultSet, accum: Set[String]): Set[String] = {
+    def tableColumnReader(resultSet: ResultSet, accum: Set[String]): Set[String] =
       Try(resultSet.getString(ColumnNameColumn)) match {
         case Success(columnName) => accum + columnName
         case Failure(e) =>
           e.printStackTrace(System.err)
           accum
       }
-    }
+
 
     tableNames.map { tableName =>
       val statement = connection.createStatement()
 
       val resultSet = statement.executeQuery(tableColumnQuery(tableName))
-      TableColumnMetadata(tableName, iterateOverResultSet(resultSet, Set[String](), tableColumnReader))
+      TableColumnMetadata(tableName, iterateOverResultSet(resultSet, Set[String](), tableColumnReader).toList)
     }
 
   }
 
-  case class TableColumnMetadata(table: String, metadata: Iterable[String])
+  def guessTimeColumn(columns: Iterable[String]): Option[String] = columns.find(_.startsWith("local"))
 
-  type DataRow = Map[String, String]
-
-  type DataRows = List[DataRow]
-
-  case class TableData(table: String, tableData: DataRows)
-
-  def retrieveTableData(tableMetadata: TableColumnMetadata, connection: Connection): Option[TableData] = {
-
-    def guessTimeColumn(columns: Iterable[String]): Option[String] = columns.find(_.startsWith("local"))
+  def generateTimeIntervals(tableColumnMetadata: TableColumnMetadata, timeColumn: String, connection: Connection): List[TimeRange] = {
 
     def retrieveStartTime(table: String, timeColumn: String): Option[Timestamp] = {
 
@@ -134,17 +112,11 @@ object Extract {
       c
     }
 
-    def tableDataReader(resultSet: ResultSet, accum: DataRows): DataRows = {
-      accum :+ tableMetadata.metadata.map { field =>
-        field -> resultSet.getString(field)
-      }.toMap
-    }
-
-    for {
-      timeColumn <- guessTimeColumn(tableMetadata.metadata)
-      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
-      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
+    (for {
+      startTime <- retrieveStartTime(tableColumnMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
+      endTime <- retrieveEndTime(tableColumnMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
     } yield {
+
       val timeSlices = ListBuffer[Calendar]()
       timeSlices += startTime
 
@@ -155,26 +127,33 @@ object Extract {
         timeSlices += dateBetween
       }
 
-      case class TimeRange(start: Calendar, end: Calendar)
-      val timeRanges = timeSlices.sliding(2).toList.map(l => TimeRange(l.head, l.last))
+      timeSlices.sliding(2).toList.map(l => TimeRange(l.head, l.last))
 
-      timeRanges.take(1).map { timeRange =>
+    }).getOrElse(List[TimeRange]())
+  }
 
-        val startDate = new java.sql.Date(timeRange.start.getTimeInMillis)
-        val endDate = new java.sql.Date(timeRange.end.getTimeInMillis)
+  def retrieveTableData(tableMetadata: TableColumnMetadata, timeColumn: String, timeRange: TimeRange, connection: Connection): TableData = {
 
-        val statement = connection.createStatement()
-
-        val query = s"select * " +
-          s"from ${Config.Server.schema}.${tableMetadata.table} " +
-          s"where $timeColumn between '$startDate' and '$endDate'"
-
-        val resultSet = statement.executeQuery(query)
-
-        iterateOverResultSet(resultSet, List[Map[String, String]](), tableDataReader)
-      }.map(TableData(tableMetadata.table, _))
-
+    def tableDataReader(resultSet: ResultSet, accum: DataRows): DataRows = {
+      accum :+ tableMetadata.metadata.map { field =>
+        field -> resultSet.getString(field)
+      }.toMap
     }
+
+
+    val startDate = new java.sql.Date(timeRange.start.getTimeInMillis)
+    val endDate = new java.sql.Date(timeRange.end.getTimeInMillis)
+
+    val statement = connection.createStatement()
+
+    val query = s"select * " +
+      s"from ${Config.Server.schema}.${tableMetadata.table} " +
+      s"where $timeColumn between '$startDate' and '$endDate'"
+
+    val resultSet = statement.executeQuery(query)
+
+    TableData(tableMetadata.table, iterateOverResultSet(resultSet, List[Map[String, String]](), tableDataReader))
+
   }
 
 }

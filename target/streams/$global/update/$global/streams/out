@@ -7,7 +7,7 @@
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [compile]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->org.scala-lang#scala-library;2.11.8 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-library;2.11.8 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@78d30351
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@6c8b1888
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.11.8
 [debug] 	found org.scala-lang#scala-library;2.11.8 in sbt-chain
 [debug] 	[2.11.8] org.scala-lang#scala-library;2.11.8
@@ -33,27 +33,8 @@
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.play#play-json_2.11;2.5.8 [compile->default(compile)]
 [info] Resolving com.typesafe.play#play-json_2.11;2.5.8 ...
 [debug] sbt-chain: Checking cache for: dependency: com.typesafe.play#play-json_2.11;2.5.8 {compile=[default(compile)]}
-[info] Resolving com.typesafe.play#play-json_2.11;2.5.8 ...
-[debug] sbt-chain-delegate: Checking cache for: dependency: com.typesafe.play#play-json_2.11;2.5.8 {compile=[default(compile)]}
-[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.play/play-json_2.11/2.5.8/ivys/ivy.xml
-[debug] 	local: no ivy file found for com.typesafe.play#play-json_2.11;2.5.8
-[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.play/play-json_2.11/2.5.8/ivys/ivy.xml
-[debug] 	activator-local: no ivy file found for com.typesafe.play#play-json_2.11;2.5.8
-[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.play/play-json_2.11/2.5.8/ivys/ivy.xml
-[debug] 	activator-launcher-local: no ivy file found for com.typesafe.play#play-json_2.11;2.5.8
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.pom
-[debug] 	public: found md file for com.typesafe.play#play-json_2.11;2.5.8
-[debug] 		=> https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.pom (2.5.8)
-[debug] downloading https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.pom ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.pom
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.pom.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.pom
-[debug] 	[SUCCESSFUL ] com.typesafe.play#play-json_2.11;2.5.8!play-json_2.11.pom(pom.original) (214ms)
-[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.play/play-json_2.11/2.5.8/jars/play-json_2.11.jar
-[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.play/play-json_2.11/2.5.8/jars/play-json_2.11.jar
-[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.play/play-json_2.11/2.5.8/jars/play-json_2.11.jar
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.jar
-[debug] 	found com.typesafe.play#play-json_2.11;2.5.8 in public
+[debug] sbt-chain: module revision found in cache: com.typesafe.play#play-json_2.11;2.5.8
+[debug] 	found com.typesafe.play#play-json_2.11;2.5.8 in sbt-chain
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.play#play-json_2.11;2.5.8 [compile->runtime]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.play#play-json_2.11;2.5.8 [compile->compile]
 [debug] == resolving dependencies com.typesafe.play#play-json_2.11;2.5.8->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
@@ -63,27 +44,8 @@
 [debug] == resolving dependencies com.typesafe.play#play-json_2.11;2.5.8->com.typesafe.play#play-iteratees_2.11;2.5.8 [compile->master(compile)]
 [info] Resolving com.typesafe.play#play-iteratees_2.11;2.5.8 ...
 [debug] sbt-chain: Checking cache for: dependency: com.typesafe.play#play-iteratees_2.11;2.5.8 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[info] Resolving com.typesafe.play#play-iteratees_2.11;2.5.8 ...
-[debug] sbt-chain-delegate: Checking cache for: dependency: com.typesafe.play#play-iteratees_2.11;2.5.8 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.play/play-iteratees_2.11/2.5.8/ivys/ivy.xml
-[debug] 	local: no ivy file found for com.typesafe.play#play-iteratees_2.11;2.5.8
-[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.play/play-iteratees_2.11/2.5.8/ivys/ivy.xml
-[debug] 	activator-local: no ivy file found for com.typesafe.play#play-iteratees_2.11;2.5.8
-[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.play/play-iteratees_2.11/2.5.8/ivys/ivy.xml
-[debug] 	activator-launcher-local: no ivy file found for com.typesafe.play#play-iteratees_2.11;2.5.8
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.pom
-[debug] 	public: found md file for com.typesafe.play#play-iteratees_2.11;2.5.8
-[debug] 		=> https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.pom (2.5.8)
-[debug] downloading https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.pom ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.pom
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.pom.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.pom
-[debug] 	[SUCCESSFUL ] com.typesafe.play#play-iteratees_2.11;2.5.8!play-iteratees_2.11.pom(pom.original) (199ms)
-[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.play/play-iteratees_2.11/2.5.8/jars/play-iteratees_2.11.jar
-[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.play/play-iteratees_2.11/2.5.8/jars/play-iteratees_2.11.jar
-[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.play/play-iteratees_2.11/2.5.8/jars/play-iteratees_2.11.jar
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.jar
-[debug] 	found com.typesafe.play#play-iteratees_2.11;2.5.8 in public
+[debug] sbt-chain: module revision found in cache: com.typesafe.play#play-iteratees_2.11;2.5.8
+[debug] 	found com.typesafe.play#play-iteratees_2.11;2.5.8 in sbt-chain
 [debug] == resolving dependencies com.typesafe.play#play-json_2.11;2.5.8->com.typesafe.play#play-iteratees_2.11;2.5.8 [compile->compile(*)]
 [debug] == resolving dependencies com.typesafe.play#play-iteratees_2.11;2.5.8->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
 [debug] == resolving dependencies com.typesafe.play#play-iteratees_2.11;2.5.8->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
@@ -118,27 +80,8 @@
 [debug] == resolving dependencies com.typesafe.play#play-json_2.11;2.5.8->com.typesafe.play#play-functional_2.11;2.5.8 [compile->master(compile)]
 [info] Resolving com.typesafe.play#play-functional_2.11;2.5.8 ...
 [debug] sbt-chain: Checking cache for: dependency: com.typesafe.play#play-functional_2.11;2.5.8 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[info] Resolving com.typesafe.play#play-functional_2.11;2.5.8 ...
-[debug] sbt-chain-delegate: Checking cache for: dependency: com.typesafe.play#play-functional_2.11;2.5.8 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.play/play-functional_2.11/2.5.8/ivys/ivy.xml
-[debug] 	local: no ivy file found for com.typesafe.play#play-functional_2.11;2.5.8
-[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.play/play-functional_2.11/2.5.8/ivys/ivy.xml
-[debug] 	activator-local: no ivy file found for com.typesafe.play#play-functional_2.11;2.5.8
-[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.play/play-functional_2.11/2.5.8/ivys/ivy.xml
-[debug] 	activator-launcher-local: no ivy file found for com.typesafe.play#play-functional_2.11;2.5.8
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.pom
-[debug] 	public: found md file for com.typesafe.play#play-functional_2.11;2.5.8
-[debug] 		=> https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.pom (2.5.8)
-[debug] downloading https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.pom ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.pom
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.pom.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.pom
-[debug] 	[SUCCESSFUL ] com.typesafe.play#play-functional_2.11;2.5.8!play-functional_2.11.pom(pom.original) (198ms)
-[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.play/play-functional_2.11/2.5.8/jars/play-functional_2.11.jar
-[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.play/play-functional_2.11/2.5.8/jars/play-functional_2.11.jar
-[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.play/play-functional_2.11/2.5.8/jars/play-functional_2.11.jar
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.jar
-[debug] 	found com.typesafe.play#play-functional_2.11;2.5.8 in public
+[debug] sbt-chain: module revision found in cache: com.typesafe.play#play-functional_2.11;2.5.8
+[debug] 	found com.typesafe.play#play-functional_2.11;2.5.8 in sbt-chain
 [debug] == resolving dependencies com.typesafe.play#play-json_2.11;2.5.8->com.typesafe.play#play-functional_2.11;2.5.8 [compile->compile(*)]
 [debug] == resolving dependencies com.typesafe.play#play-functional_2.11;2.5.8->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
 [debug] == resolving dependencies com.typesafe.play#play-functional_2.11;2.5.8->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
@@ -152,27 +95,8 @@
 [debug] == resolving dependencies com.typesafe.play#play-json_2.11;2.5.8->com.typesafe.play#play-datacommons_2.11;2.5.8 [compile->master(compile)]
 [info] Resolving com.typesafe.play#play-datacommons_2.11;2.5.8 ...
 [debug] sbt-chain: Checking cache for: dependency: com.typesafe.play#play-datacommons_2.11;2.5.8 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[info] Resolving com.typesafe.play#play-datacommons_2.11;2.5.8 ...
-[debug] sbt-chain-delegate: Checking cache for: dependency: com.typesafe.play#play-datacommons_2.11;2.5.8 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.play/play-datacommons_2.11/2.5.8/ivys/ivy.xml
-[debug] 	local: no ivy file found for com.typesafe.play#play-datacommons_2.11;2.5.8
-[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.play/play-datacommons_2.11/2.5.8/ivys/ivy.xml
-[debug] 	activator-local: no ivy file found for com.typesafe.play#play-datacommons_2.11;2.5.8
-[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.play/play-datacommons_2.11/2.5.8/ivys/ivy.xml
-[debug] 	activator-launcher-local: no ivy file found for com.typesafe.play#play-datacommons_2.11;2.5.8
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.pom
-[debug] 	public: found md file for com.typesafe.play#play-datacommons_2.11;2.5.8
-[debug] 		=> https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.pom (2.5.8)
-[debug] downloading https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.pom ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.pom
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.pom.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.pom
-[debug] 	[SUCCESSFUL ] com.typesafe.play#play-datacommons_2.11;2.5.8!play-datacommons_2.11.pom(pom.original) (202ms)
-[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.play/play-datacommons_2.11/2.5.8/jars/play-datacommons_2.11.jar
-[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.play/play-datacommons_2.11/2.5.8/jars/play-datacommons_2.11.jar
-[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.play/play-datacommons_2.11/2.5.8/jars/play-datacommons_2.11.jar
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.jar
-[debug] 	found com.typesafe.play#play-datacommons_2.11;2.5.8 in public
+[debug] sbt-chain: module revision found in cache: com.typesafe.play#play-datacommons_2.11;2.5.8
+[debug] 	found com.typesafe.play#play-datacommons_2.11;2.5.8 in sbt-chain
 [debug] == resolving dependencies com.typesafe.play#play-json_2.11;2.5.8->com.typesafe.play#play-datacommons_2.11;2.5.8 [compile->compile(*)]
 [debug] == resolving dependencies com.typesafe.play#play-datacommons_2.11;2.5.8->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
 [debug] == resolving dependencies com.typesafe.play#play-datacommons_2.11;2.5.8->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
@@ -308,6 +232,137 @@
 [debug] == resolving dependencies com.typesafe.play#play-json_2.11;2.5.8->com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6 [runtime->runtime(*)]
 [debug] == resolving dependencies com.typesafe.play#play-json_2.11;2.5.8->com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6 [runtime->compile]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.play#play-json_2.11;2.5.8 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->default(compile)]
+[info] Resolving com.typesafe.akka#akka-actor_2.11;2.4.11 ...
+[debug] sbt-chain: Checking cache for: dependency: com.typesafe.akka#akka-actor_2.11;2.4.11 {compile=[default(compile)]}
+[debug] sbt-chain: module revision found in cache: com.typesafe.akka#akka-actor_2.11;2.4.11
+[debug] 	found com.typesafe.akka#akka-actor_2.11;2.4.11 in sbt-chain
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->master(compile)]
+[info] Resolving org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 ...
+[debug] sbt-chain: Checking cache for: dependency: org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-java8-compat_2.11;0.7.0
+[debug] 	found org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 in sbt-chain
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->default(compile)]
+[info] Resolving com.typesafe.akka#akka-stream_2.11;2.4.11 ...
+[debug] sbt-chain: Checking cache for: dependency: com.typesafe.akka#akka-stream_2.11;2.4.11 {compile=[default(compile)]}
+[info] Resolving com.typesafe.akka#akka-stream_2.11;2.4.11 ...
+[debug] sbt-chain-delegate: Checking cache for: dependency: com.typesafe.akka#akka-stream_2.11;2.4.11 {compile=[default(compile)]}
+[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.akka/akka-stream_2.11/2.4.11/ivys/ivy.xml
+[debug] 	local: no ivy file found for com.typesafe.akka#akka-stream_2.11;2.4.11
+[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.akka/akka-stream_2.11/2.4.11/ivys/ivy.xml
+[debug] 	activator-local: no ivy file found for com.typesafe.akka#akka-stream_2.11;2.4.11
+[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.akka/akka-stream_2.11/2.4.11/ivys/ivy.xml
+[debug] 	activator-launcher-local: no ivy file found for com.typesafe.akka#akka-stream_2.11;2.4.11
+[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.pom
+[debug] 	public: found md file for com.typesafe.akka#akka-stream_2.11;2.4.11
+[debug] 		=> https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.pom (2.4.11)
+[debug] downloading https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.pom ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.pom
+[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.pom.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.pom
+[debug] 	[SUCCESSFUL ] com.typesafe.akka#akka-stream_2.11;2.4.11!akka-stream_2.11.pom(pom.original) (264ms)
+[debug] 		tried /Users/vicaba/.ivy2/local/com.typesafe.akka/akka-stream_2.11/2.4.11/jars/akka-stream_2.11.jar
+[debug] 		tried /Applications/activator-dist-1.3.10/repository/com.typesafe.akka/akka-stream_2.11/2.4.11/jars/akka-stream_2.11.jar
+[debug] 		tried /Users/vicaba/.activator/repository/com.typesafe.akka/akka-stream_2.11/2.4.11/jars/akka-stream_2.11.jar
+[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.jar
+[debug] 	found com.typesafe.akka#akka-stream_2.11;2.4.11 in public
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->master(compile)]
+[info] Resolving com.typesafe#ssl-config-akka_2.11;0.2.1 ...
+[debug] sbt-chain: Checking cache for: dependency: com.typesafe#ssl-config-akka_2.11;0.2.1 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] sbt-chain: module revision found in cache: com.typesafe#ssl-config-akka_2.11;0.2.1
+[debug] 	found com.typesafe#ssl-config-akka_2.11;0.2.1 in sbt-chain
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->master(compile)]
+[info] Resolving com.typesafe#ssl-config-core_2.11;0.2.1 ...
+[debug] sbt-chain: Checking cache for: dependency: com.typesafe#ssl-config-core_2.11;0.2.1 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] sbt-chain: module revision found in cache: com.typesafe#ssl-config-core_2.11;0.2.1
+[debug] 	found com.typesafe#ssl-config-core_2.11;0.2.1 in sbt-chain
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->master(compile)]
+[info] Resolving org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 ...
+[debug] sbt-chain: Checking cache for: dependency: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4
+[debug] 	found org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 in sbt-chain
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->master(compile)]
+[info] Resolving org.reactivestreams#reactive-streams;1.0.0 ...
+[debug] sbt-chain: Checking cache for: dependency: org.reactivestreams#reactive-streams;1.0.0 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
+[debug] sbt-chain: module revision found in cache: org.reactivestreams#reactive-streams;1.0.0
+[debug] 	found org.reactivestreams#reactive-streams;1.0.0 in sbt-chain
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->master]
 [debug] resolving dependencies for configuration 'runtime'
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [runtime]
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [compile]
@@ -450,6 +505,82 @@
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->runtime(*)]
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->compile]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.play#play-json_2.11;2.5.8 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->master]
 [debug] resolving dependencies for configuration 'test'
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [test]
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [runtime]
@@ -593,6 +724,82 @@
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->runtime(*)]
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->compile]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.play#play-json_2.11;2.5.8 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->master]
 [debug] resolving dependencies for configuration 'provided'
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [provided]
 [debug] resolving dependencies for configuration 'optional'
@@ -739,6 +946,82 @@
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->runtime(*)]
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->compile]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.play#play-json_2.11;2.5.8 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->master]
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [optional]
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [provided]
 [debug] resolving dependencies for configuration 'runtime-internal'
@@ -884,6 +1167,82 @@
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->runtime(*)]
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->compile]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.play#play-json_2.11;2.5.8 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->master]
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [optional]
 [debug] resolving dependencies for configuration 'test-internal'
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [test-internal]
@@ -1029,6 +1388,82 @@
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->runtime(*)]
 [debug] == resolving dependencies com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6->com.fasterxml.jackson.core#jackson-databind;2.7.6 [runtime->compile]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.play#play-json_2.11;2.5.8 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-actor_2.11;2.4.11->org.scala-lang.modules#scala-java8-compat_2.11;0.7.0 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-java8-compat_2.11;0.7.0->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->default(compile)]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->runtime]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->master(compile)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [compile->compile(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe.akka#akka-actor_2.11;2.4.11 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->com.typesafe#ssl-config-akka_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-akka_2.11;0.2.1->com.typesafe#ssl-config-core_2.11;0.2.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.2.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->com.typesafe#config;1.3.1 [runtime->compile]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe#ssl-config-core_2.11;0.2.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->compile]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->runtime(*)]
+[debug] == resolving dependencies com.typesafe.akka#akka-stream_2.11;2.4.11->org.reactivestreams#reactive-streams;1.0.0 [runtime->compile]
+[debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->com.typesafe.akka#akka-stream_2.11;2.4.11 [compile->master]
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [optional]
 [debug] == resolving dependencies for default#dataport-pecanstreet-etl_2.11;1.0 [provided]
 [debug] resolving dependencies for configuration 'plugin'
@@ -1084,20 +1519,11 @@
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-xml_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->compile]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->master(compile)]
-[info] Resolving org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 ...
-[debug] sbt-chain: Checking cache for: dependency: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4
-[debug] 	found org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 in sbt-chain
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->master(compile)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [compile->compile(*)]
 [debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [compile->compile(*)]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->runtime(*)]
-[debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [compile->compile]
-[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
-[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->compile]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang#scala-library;2.11.8 [runtime->compile]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang#scala-reflect;2.11.8 [runtime->runtime(*)]
@@ -1106,6 +1532,9 @@
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang.modules#scala-xml_2.11;1.0.4 [runtime->compile]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->runtime(*)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4 [runtime->compile]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.6 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->runtime(*)]
+[debug] == resolving dependencies org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4->org.scala-lang#scala-library;2.11.8 [runtime->compile]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->org.scala-lang#scala-compiler;2.11.8 [scala-tool->master]
 [debug] == resolving dependencies default#dataport-pecanstreet-etl_2.11;1.0->org.scala-lang#scala-compiler;2.11.8 [scala-tool->optional(default)]
 [debug] == resolving dependencies org.scala-lang#scala-compiler;2.11.8->jline#jline;2.12.1 [optional->master(compile)]
@@ -1124,30 +1553,17 @@
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.11.8!scala-library.jar
 [debug] 	[NOT REQUIRED] org.postgresql#postgresql;9.4.1211.jre7!postgresql.jar(bundle)
 [debug] 	[NOT REQUIRED] com.typesafe#config;1.3.1!config.jar(bundle)
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.jar
-[info] downloading https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.jar ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/play/play-json_2.11/2.5.8/play-json_2.11-2.5.8.jar
-[info] 	[SUCCESSFUL ] com.typesafe.play#play-json_2.11;2.5.8!play-json_2.11.jar (520ms)
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.jar
-[info] downloading https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.jar ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/play/play-iteratees_2.11/2.5.8/play-iteratees_2.11-2.5.8.jar
-[info] 	[SUCCESSFUL ] com.typesafe.play#play-iteratees_2.11;2.5.8!play-iteratees_2.11.jar (362ms)
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.jar
-[info] downloading https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.jar ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/play/play-functional_2.11/2.5.8/play-functional_2.11-2.5.8.jar
-[info] 	[SUCCESSFUL ] com.typesafe.play#play-functional_2.11;2.5.8!play-functional_2.11.jar (532ms)
-[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.jar
-[info] downloading https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.jar ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/play/play-datacommons_2.11/2.5.8/play-datacommons_2.11-2.5.8.jar
-[info] 	[SUCCESSFUL ] com.typesafe.play#play-datacommons_2.11;2.5.8!play-datacommons_2.11.jar (203ms)
+[debug] 	[NOT REQUIRED] com.typesafe.play#play-json_2.11;2.5.8!play-json_2.11.jar
+[debug] 	[NOT REQUIRED] com.typesafe.akka#akka-actor_2.11;2.4.11!akka-actor_2.11.jar
+[debug] 		tried https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.jar
+[info] downloading https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.11/2.4.11/akka-stream_2.11-2.4.11.jar
+[info] 	[SUCCESSFUL ] com.typesafe.akka#akka-stream_2.11;2.4.11!akka-stream_2.11.jar (2561ms)
+[debug] 	[NOT REQUIRED] com.typesafe.play#play-iteratees_2.11;2.5.8!play-iteratees_2.11.jar
+[debug] 	[NOT REQUIRED] com.typesafe.play#play-functional_2.11;2.5.8!play-functional_2.11.jar
+[debug] 	[NOT REQUIRED] com.typesafe.play#play-datacommons_2.11;2.5.8!play-datacommons_2.11.jar
 [debug] 	[NOT REQUIRED] joda-time#joda-time;2.9.4!joda-time.jar
 [debug] 	[NOT REQUIRED] org.joda#joda-convert;1.8.1!joda-convert.jar
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-reflect;2.11.7!scala-reflect.jar
@@ -1157,12 +1573,16 @@
 [debug] 	[NOT REQUIRED] com.fasterxml.jackson.datatype#jackson-datatype-jdk8;2.7.6!jackson-datatype-jdk8.jar(bundle)
 [debug] 	[NOT REQUIRED] com.fasterxml.jackson.datatype#jackson-datatype-jsr310;2.7.6!jackson-datatype-jsr310.jar(bundle)
 [debug] 	[NOT REQUIRED] org.scala-stm#scala-stm_2.11;0.7!scala-stm_2.11.jar
+[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-java8-compat_2.11;0.7.0!scala-java8-compat_2.11.jar(bundle)
+[debug] 	[NOT REQUIRED] com.typesafe#ssl-config-akka_2.11;0.2.1!ssl-config-akka_2.11.jar(bundle)
+[debug] 	[NOT REQUIRED] org.reactivestreams#reactive-streams;1.0.0!reactive-streams.jar
+[debug] 	[NOT REQUIRED] com.typesafe#ssl-config-core_2.11;0.2.1!ssl-config-core_2.11.jar(bundle)
+[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4!scala-parser-combinators_2.11.jar(bundle)
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.11.8!scala-compiler.jar
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-reflect;2.11.8!scala-reflect.jar
 [debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.11;1.0.4!scala-xml_2.11.jar(bundle)
-[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4!scala-parser-combinators_2.11.jar(bundle)
 [debug] 	[NOT REQUIRED] jline#jline;2.12.1!jline.jar
-[debug] :: resolution report :: resolve 2828ms :: artifacts dl 1640ms
+[debug] :: resolution report :: resolve 3025ms :: artifacts dl 2610ms
 [debug] 	report for default#dataport-pecanstreet-etl_2.11;1.0 compile produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/target/resolution-cache/reports/default-dataport-pecanstreet-etl_2.11-compile.xml
 [debug] 	report for default#dataport-pecanstreet-etl_2.11;1.0 runtime produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/target/resolution-cache/reports/default-dataport-pecanstreet-etl_2.11-runtime.xml
 [debug] 	report for default#dataport-pecanstreet-etl_2.11;1.0 test produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/target/resolution-cache/reports/default-dataport-pecanstreet-etl_2.11-test.xml
@@ -1176,5 +1596,5 @@
 [debug] 	report for default#dataport-pecanstreet-etl_2.11;1.0 docs produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/target/resolution-cache/reports/default-dataport-pecanstreet-etl_2.11-docs.xml
 [debug] 	report for default#dataport-pecanstreet-etl_2.11;1.0 pom produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/target/resolution-cache/reports/default-dataport-pecanstreet-etl_2.11-pom.xml
 [debug] 	report for default#dataport-pecanstreet-etl_2.11;1.0 scala-tool produced in /Users/vicaba/Projects/lasalle-projects/dataport-pecanstreet-etl/target/resolution-cache/reports/default-dataport-pecanstreet-etl_2.11-scala-tool.xml
-[debug] 	resolve done (2828ms resolve - 1640ms download)
+[debug] 	resolve done (3025ms resolve - 2610ms download)
 [info] Done updating.
