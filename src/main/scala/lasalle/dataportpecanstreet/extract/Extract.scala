@@ -5,6 +5,7 @@ import java.sql.{Connection, ResultSet, Timestamp}
 import java.util.{Calendar, Date}
 
 import lasalle.dataportpecanstreet.Config
+import lasalle.dataportpecanstreet.extract.table.{ColumnMetadata, DataType, TableData, TableMetadata}
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
@@ -14,14 +15,6 @@ import scala.util.{Failure, Success, Try}
 object Extract {
 
   case class TimeRange(start: Calendar, end: Calendar)
-
-  case class TableColumnMetadata(table: String, metadata: List[String])
-
-  type DataRow = Map[String, String]
-
-  type DataRows = List[DataRow]
-
-  case class TableData(table: String, tableData: DataRows)
 
   @tailrec
   def iterateOverResultSet[R](resultSet: ResultSet, accum: R, f: (ResultSet, R) => R): R = {
@@ -50,37 +43,35 @@ object Extract {
     }.getOrElse(Set())
   }
 
-
-  def retrieveTableColumnMetadata(tableNames: Iterable[String], connection: Connection): Iterable[TableColumnMetadata] = {
+  def retrieveColumnMetadata(tableName: String, connection: Connection): Iterable[ColumnMetadata] = {
 
     val ColumnNameColumn = "column_name"
+    val DataTypeColumn = "data_type"
 
     val tableColumnQuery = (table: String) =>
-      s"select $ColumnNameColumn " +
+      s"select $ColumnNameColumn, $DataTypeColumn " +
         s"from information_schema.columns " +
         s"where table_schema = '${Config.Server.schema}' and table_name = '${table}'"
 
-    def tableColumnReader(resultSet: ResultSet, accum: Set[String]): Set[String] =
-      Try(resultSet.getString(ColumnNameColumn)) match {
-        case Success(columnName) => accum + columnName
-        case Failure(e) =>
-          e.printStackTrace(System.err)
-          accum
-      }
+    def tableColumnReader(resultSet: ResultSet, accum: Set[ColumnMetadata]): Set[ColumnMetadata] =
+      (for {
+        columnName <- Try(resultSet.getString(ColumnNameColumn))
+        dataType <- Try(resultSet.getString(DataTypeColumn))
+      } yield {
+        accum + ColumnMetadata(columnName, DataType.Undefined(dataType))
+      }).getOrElse(Set[ColumnMetadata]())
 
+    val statement = connection.createStatement()
 
-    tableNames.map { tableName =>
-      val statement = connection.createStatement()
-
-      val resultSet = statement.executeQuery(tableColumnQuery(tableName))
-      TableColumnMetadata(tableName, iterateOverResultSet(resultSet, Set[String](), tableColumnReader).toList)
-    }
-
+    val resultSet = statement.executeQuery(tableColumnQuery(tableName))
+    val res = iterateOverResultSet(resultSet, Set[ColumnMetadata](), tableColumnReader)
+    println(res)
+    res
   }
 
   def guessTimeColumn(columns: Iterable[String]): Option[String] = columns.find(_.startsWith("local"))
 
-  def generateTimeIntervals(tableColumnMetadata: TableColumnMetadata, timeColumn: String, connection: Connection): List[TimeRange] = {
+  def generateTimeIntervals(tableMetadata: TableMetadata, timeColumn: String, connection: Connection): List[TimeRange] = {
 
     def retrieveStartTime(table: String, timeColumn: String): Option[Timestamp] = {
 
@@ -113,8 +104,8 @@ object Extract {
     }
 
     (for {
-      startTime <- retrieveStartTime(tableColumnMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
-      endTime <- retrieveEndTime(tableColumnMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
+      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
+      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
     } yield {
 
       val timeSlices = ListBuffer[Calendar]()
@@ -132,11 +123,11 @@ object Extract {
     }).getOrElse(List[TimeRange]())
   }
 
-  def retrieveTableData(tableMetadata: TableColumnMetadata, timeColumn: String, timeRange: TimeRange, connection: Connection): TableData = {
+  def retrieveTableData(tableMetadata: TableMetadata, timeColumn: String, timeRange: TimeRange, connection: Connection): TableData = {
 
-    def tableDataReader(resultSet: ResultSet, accum: DataRows): DataRows = {
+    def tableDataReader(resultSet: ResultSet, accum: TableData.Registers): TableData.Registers = {
       accum :+ tableMetadata.metadata.map { field =>
-        field -> resultSet.getString(field)
+        field.name -> resultSet.getString(field.name)
       }.toMap
     }
 
@@ -152,7 +143,11 @@ object Extract {
 
     val resultSet = statement.executeQuery(query)
 
-    TableData(tableMetadata.table, iterateOverResultSet(resultSet, List[Map[String, String]](), tableDataReader))
+    Try(TableData(tableMetadata, iterateOverResultSet(resultSet, TableData.registers(), tableDataReader))).recover {
+      case t => t.printStackTrace(System.err)
+    }
+
+    null
 
   }
 

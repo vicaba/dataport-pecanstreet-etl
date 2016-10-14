@@ -1,6 +1,7 @@
 package lasalle.dataportpecanstreet
 
 import lasalle.dataportpecanstreet.extract.Extract
+import lasalle.dataportpecanstreet.extract.table.TableMetadata
 import lasalle.dataportpecanstreet.transform.Transform
 
 /**
@@ -14,22 +15,20 @@ object Main {
       val tables = Set("electricity_egauge_hours", "electricity_egauge_15min", "electricity_egauge_minutes")
       tables.foreach(println)
       println(tables.count(_ => true))
-      val tablesColumnMetadata = Extract.retrieveTableColumnMetadata(tables, connection)
+      val tablesMetadata = tables
+        .map { tableName => tableName -> Extract.retrieveColumnMetadata(tableName, connection) }
+        .map { case (tableName, metadata) => TableMetadata(tableName, metadata) }
 
-
-
-      tablesColumnMetadata.map { tableColumnMetadata =>
-        Extract.guessTimeColumn(tableColumnMetadata.metadata).map { timeColumn =>
-          Extract.generateTimeIntervals(tableColumnMetadata, timeColumn, connection).map { timeRange =>
-            val res = Extract.retrieveTableData(tableColumnMetadata, timeColumn, timeRange, connection)
-            println(Transform.dataRowsToJsonObject(res.tableData))
-            res
+      tablesMetadata.flatMap { tableMetadata =>
+        Extract.guessTimeColumn(tableMetadata.metadata.map(_.name)).map { timeColumn =>
+          Extract.generateTimeIntervals(tableMetadata, timeColumn, connection).map { timeRange =>
+            val res = Extract.retrieveTableData(tableMetadata, timeColumn, timeRange, connection)
+            val json = Transform.dataRowsToJsonObject(res.tableData)
+            println(json)
+            json
           }
         }
-
       }
-
-      //iterateOverResultSet(resultSet, List(), (r, _: List[Any]) => { println(r.getTimestamp("localhour")); List() })
 
       connection.close()
     }
