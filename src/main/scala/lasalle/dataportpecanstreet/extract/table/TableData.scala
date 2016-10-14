@@ -6,7 +6,7 @@ object TableData {
   type Registers = List[Register]
 
   def register() = Map[String, String]()
-  def registers() = List(register())
+  def registers() = List[Register]()
 
 }
 

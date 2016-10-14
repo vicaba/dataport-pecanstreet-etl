@@ -19,16 +19,19 @@ object Main {
         .map { tableName => tableName -> Extract.retrieveColumnMetadata(tableName, connection) }
         .map { case (tableName, metadata) => TableMetadata(tableName, metadata) }
 
-      tablesMetadata.flatMap { tableMetadata =>
+      val res = tablesMetadata.flatMap { tableMetadata =>
+        println("tablesMetadata")
         Extract.guessTimeColumn(tableMetadata.metadata.map(_.name)).map { timeColumn =>
+          println("timeColumn")
           Extract.generateTimeIntervals(tableMetadata, timeColumn, connection).map { timeRange =>
             val res = Extract.retrieveTableData(tableMetadata, timeColumn, timeRange, connection)
-            val json = Transform.dataRowsToJsonObject(res.tableData)
-            println(json)
-            json
+            println("res")
+            Transform.dataRowsToJsonObject(res.tableData)
           }
         }
       }
+
+      println(res)
 
       connection.close()
     }

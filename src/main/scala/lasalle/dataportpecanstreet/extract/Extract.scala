@@ -131,7 +131,6 @@ object Extract {
       }.toMap
     }
 
-
     val startDate = new java.sql.Date(timeRange.start.getTimeInMillis)
     val endDate = new java.sql.Date(timeRange.end.getTimeInMillis)
 
@@ -143,11 +142,7 @@ object Extract {
 
     val resultSet = statement.executeQuery(query)
 
-    Try(TableData(tableMetadata, iterateOverResultSet(resultSet, TableData.registers(), tableDataReader))).recover {
-      case t => t.printStackTrace(System.err)
-    }
-
-    null
+    TableData(tableMetadata, iterateOverResultSet(resultSet, TableData.registers(), tableDataReader))
 
   }
 
