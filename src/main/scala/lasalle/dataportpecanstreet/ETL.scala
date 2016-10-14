@@ -1,13 +1,17 @@
 package lasalle.dataportpecanstreet
 
+import com.typesafe.scalalogging.Logger
 import lasalle.dataportpecanstreet.extract.Extract
 import lasalle.dataportpecanstreet.extract.table.TableMetadata
 import lasalle.dataportpecanstreet.transform.Transform
+import org.slf4j.LoggerFactory
 
 /**
   * Created by vicaba on 04/10/2016.
   */
-object Main {
+object ETL {
+
+  val logger = Logger("ETL")
 
   def main(args: Array[String]): Unit = {
     lasalle.dataportpecanstreet.Connection.connect().map { connection =>
@@ -20,13 +24,13 @@ object Main {
         .map { case (tableName, metadata) => TableMetadata(tableName, metadata) }
 
       val res = tablesMetadata.flatMap { tableMetadata =>
-        println("tablesMetadata")
+        logger.info("Table {}", tableMetadata.table)
         Extract.guessTimeColumn(tableMetadata.metadata.map(_.name)).map { timeColumn =>
-          println("timeColumn")
+          logger.info("Time Column: {}", timeColumn)
           Extract.generateTimeIntervals(tableMetadata, timeColumn, connection).map { timeRange =>
             val res = Extract.retrieveTableData(tableMetadata, timeColumn, timeRange, connection)
-            println("res")
-            Transform.dataRowsToJsonObject(res.tableData)
+            logger.info("Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}", res.tableData.length.toString, timeRange.start.getTimeInMillis.toString, timeRange.end.getTimeInMillis.toString)
+            Transform.tuplesToJsonObject(res.tableData)
           }
         }
       }

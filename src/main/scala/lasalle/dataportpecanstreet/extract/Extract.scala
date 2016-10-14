@@ -4,6 +4,7 @@ package lasalle.dataportpecanstreet.extract
 import java.sql.{Connection, ResultSet, Timestamp}
 import java.util.{Calendar, Date}
 
+import com.typesafe.scalalogging.Logger
 import lasalle.dataportpecanstreet.Config
 import lasalle.dataportpecanstreet.extract.table.{ColumnMetadata, DataType, TableData, TableMetadata}
 
@@ -14,7 +15,37 @@ import scala.util.{Failure, Success, Try}
 
 object Extract {
 
+  val logger = Logger("Extract")
+
   case class TimeRange(start: Calendar, end: Calendar)
+
+  object Helper {
+    def sqlTimestampToCalendarDate(t: Timestamp) = {
+      val c = Calendar.getInstance()
+      c.setTime(new Date(t.getTime))
+      c
+    }
+  }
+
+  def postgresDataType2DomainType(dataType: String): DataType = dataType match {
+    case "integer" => DataType.Integer
+    case "numeric" => DataType.Decimal
+    case "timestamp with time zone" => DataType.Timestamp
+    case "timestamp without time zone" => DataType.Timestamp
+    case _ => DataType.String
+  }
+
+  def getFieldWithDataType(fieldName: String, dataType: DataType, resultSet: ResultSet): Any = {
+
+    def sqlTimestampToCalendarDateOrNull(t: Timestamp) = if (t == null) t else Helper.sqlTimestampToCalendarDate(t)
+
+    dataType match {
+      case DataType.Integer => resultSet.getInt(fieldName)
+      case DataType.Decimal => resultSet.getBigDecimal(fieldName).doubleValue()
+      case DataType.Timestamp => sqlTimestampToCalendarDateOrNull(resultSet.getTimestamp(fieldName))
+      case _ => resultSet.getString(fieldName)
+    }
+  }
 
   @tailrec
   def iterateOverResultSet[R](resultSet: ResultSet, accum: R, f: (ResultSet, R) => R): R = {
@@ -58,7 +89,7 @@ object Extract {
         columnName <- Try(resultSet.getString(ColumnNameColumn))
         dataType <- Try(resultSet.getString(DataTypeColumn))
       } yield {
-        accum + ColumnMetadata(columnName, DataType.Undefined(dataType))
+        accum + ColumnMetadata(columnName, postgresDataType2DomainType(dataType))
       }).getOrElse(Set[ColumnMetadata]())
 
     val statement = connection.createStatement()
@@ -97,15 +128,9 @@ object Extract {
 
     }
 
-    def sqlTimestampToCalendarDate(t: Timestamp) = {
-      val c = Calendar.getInstance()
-      c.setTime(new Date(t.getTime))
-      c
-    }
-
     (for {
-      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
-      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(sqlTimestampToCalendarDate)
+      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(Helper.sqlTimestampToCalendarDate)
+      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(Helper.sqlTimestampToCalendarDate)
     } yield {
 
       val timeSlices = ListBuffer[Calendar]()
@@ -125,9 +150,10 @@ object Extract {
 
   def retrieveTableData(tableMetadata: TableMetadata, timeColumn: String, timeRange: TimeRange, connection: Connection): TableData = {
 
-    def tableDataReader(resultSet: ResultSet, accum: TableData.Registers): TableData.Registers = {
+    def tableDataReader(resultSet: ResultSet, accum: TableData.Tuples): TableData.Tuples = {
       accum :+ tableMetadata.metadata.map { field =>
-        field.name -> resultSet.getString(field.name)
+        val dataType = tableMetadata.columnMetadataForFieldName(field.name).get._type
+        field.name -> getFieldWithDataType(field.name, dataType, resultSet)
       }.toMap
     }
 
@@ -142,7 +168,7 @@ object Extract {
 
     val resultSet = statement.executeQuery(query)
 
-    TableData(tableMetadata, iterateOverResultSet(resultSet, TableData.registers(), tableDataReader))
+    TableData(tableMetadata, iterateOverResultSet(resultSet, TableData.tuples(), tableDataReader))
 
   }
 

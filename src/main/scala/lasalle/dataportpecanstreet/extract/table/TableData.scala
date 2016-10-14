@@ -2,12 +2,12 @@ package lasalle.dataportpecanstreet.extract.table
 
 
 object TableData {
-  type Register = Map[String, String]
-  type Registers = List[Register]
+  type Tuple = Map[String, Any]
+  type Tuples = List[Tuple]
 
-  def register() = Map[String, String]()
-  def registers() = List[Register]()
+  def tuple() = Map[String, Any]()
+  def tuples() = List[Tuple]()
 
 }
 
-case class TableData(tableMetadata: TableMetadata, tableData: TableData.Registers)
+case class TableData(tableMetadata: TableMetadata, tableData: TableData.Tuples)
