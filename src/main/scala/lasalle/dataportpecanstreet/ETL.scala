@@ -5,6 +5,7 @@ import lasalle.dataportpecanstreet.extract.Extract
 import lasalle.dataportpecanstreet.extract.table.TableMetadata
 import lasalle.dataportpecanstreet.transform.Transform
 import org.slf4j.LoggerFactory
+import play.api.libs.json.Json
 
 /**
   * Created by vicaba on 04/10/2016.
@@ -30,7 +31,11 @@ object ETL {
           Extract.generateTimeIntervals(tableMetadata, timeColumn, connection).map { timeRange =>
             val res = Extract.retrieveTableData(tableMetadata, timeColumn, timeRange, connection)
             logger.info("Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}", res.tableData.length.toString, timeRange.start.getTimeInMillis.toString, timeRange.end.getTimeInMillis.toString)
-            Transform.tuplesToJsonObject(res.tableData)
+            val json = Transform.rowsToJsonObject(res.tableData)
+            json.foreach { j =>
+              println(Json.prettyPrint(j))
+            }
+            json
           }
         }
       }
@@ -38,6 +43,8 @@ object ETL {
       println(res)
 
       connection.close()
+    } recover {
+      case t: Throwable => t.printStackTrace(System.err)
     }
   }
 

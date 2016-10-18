@@ -17,6 +17,8 @@ object Extract {
 
   val logger = Logger("Extract")
 
+  val NullValueAsString = "null"
+
   case class TimeRange(start: Calendar, end: Calendar)
 
   object Helper {
@@ -35,15 +37,15 @@ object Extract {
     case _ => DataType.String
   }
 
-  def getFieldWithDataType(fieldName: String, dataType: DataType, resultSet: ResultSet): Any = {
+  def getFieldWithDataType(fieldName: String, dataType: DataType, resultSet: ResultSet): TableData.Value = {
 
     def sqlTimestampToCalendarDateOrNull(t: Timestamp) = if (t == null) t else Helper.sqlTimestampToCalendarDate(t)
 
     dataType match {
-      case DataType.Integer => resultSet.getInt(fieldName)
-      case DataType.Decimal => resultSet.getBigDecimal(fieldName).doubleValue()
-      case DataType.Timestamp => sqlTimestampToCalendarDateOrNull(resultSet.getTimestamp(fieldName))
-      case _ => resultSet.getString(fieldName)
+      case DataType.Integer => Option(resultSet.getInt(fieldName))
+      case DataType.Decimal => Option(resultSet.getBigDecimal(fieldName))
+      case DataType.Timestamp => Option(sqlTimestampToCalendarDateOrNull(resultSet.getTimestamp(fieldName)))
+      case _ => Option(resultSet.getString(fieldName)).filterNot(_ == NullValueAsString)
     }
   }
 
@@ -150,7 +152,7 @@ object Extract {
 
   def retrieveTableData(tableMetadata: TableMetadata, timeColumn: String, timeRange: TimeRange, connection: Connection): TableData = {
 
-    def tableDataReader(resultSet: ResultSet, accum: TableData.Tuples): TableData.Tuples = {
+    def tableDataReader(resultSet: ResultSet, accum: TableData.Rows): TableData.Rows = {
       accum :+ tableMetadata.metadata.map { field =>
         val dataType = tableMetadata.columnMetadataForFieldName(field.name).get._type
         field.name -> getFieldWithDataType(field.name, dataType, resultSet)

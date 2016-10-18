@@ -2,12 +2,13 @@ package lasalle.dataportpecanstreet.extract.table
 
 
 object TableData {
-  type Tuple = Map[String, Any]
-  type Tuples = List[Tuple]
+  type Value = Option[Any]
+  type Row = Map[String, Value]
+  type Rows = List[Row]
 
-  def tuple() = Map[String, Any]()
-  def tuples() = List[Tuple]()
+  def tuple() = Map[String, Value]()
+  def tuples() = List[Row]()
 
 }
 
-case class TableData(tableMetadata: TableMetadata, tableData: TableData.Tuples)
+case class TableData(tableMetadata: TableMetadata, tableData: TableData.Rows)

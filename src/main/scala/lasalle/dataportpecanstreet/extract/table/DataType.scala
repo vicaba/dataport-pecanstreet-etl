@@ -1,6 +1,6 @@
 package lasalle.dataportpecanstreet.extract.table
 
-sealed trait DataType
+sealed trait  DataType
 
 object DataType {
 
