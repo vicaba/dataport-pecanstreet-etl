@@ -2,11 +2,13 @@ package lasalle.dataportpecanstreet.extract
 
 
 import java.sql.{Connection, ResultSet, Timestamp}
+import java.time.{LocalDateTime, Period, ZoneId, ZoneOffset, Month}
 import java.util.{Calendar, Date}
 
 import com.typesafe.scalalogging.Logger
 import lasalle.dataportpecanstreet.Config
 import lasalle.dataportpecanstreet.extract.table.{ColumnMetadata, DataType, TableData, TableMetadata}
+import lasalle.dataportpecanstreet.extract.time.{Helper, TimeRange}
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
@@ -19,16 +21,6 @@ object Extract {
 
   val NullValueAsString = "null"
 
-  case class TimeRange(start: Calendar, end: Calendar)
-
-  object Helper {
-    def sqlTimestampToCalendarDate(t: Timestamp) = {
-      val c = Calendar.getInstance()
-      c.setTime(new Date(t.getTime))
-      c
-    }
-  }
-
   def postgresDataType2DomainType(dataType: String): DataType = dataType match {
     case "integer" => DataType.Integer
     case "numeric" => DataType.Decimal
@@ -39,7 +31,7 @@ object Extract {
 
   def getFieldWithDataType(fieldName: String, dataType: DataType, resultSet: ResultSet): TableData.Value = {
 
-    def sqlTimestampToCalendarDateOrNull(t: Timestamp) = if (t == null) t else Helper.sqlTimestampToCalendarDate(t)
+    def sqlTimestampToCalendarDateOrNull(t: Timestamp) = if (t == null) t else Helper.sqlTimestampToLocalTimeDate(t)
 
     dataType match {
       case DataType.Integer => Option(resultSet.getInt(fieldName))
@@ -131,22 +123,10 @@ object Extract {
     }
 
     (for {
-      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(Helper.sqlTimestampToCalendarDate)
-      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(Helper.sqlTimestampToCalendarDate)
+      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(Helper.sqlTimestampToLocalTimeDate)
+      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(Helper.sqlTimestampToLocalTimeDate)
     } yield {
-
-      val timeSlices = ListBuffer[Calendar]()
-      timeSlices += startTime
-
-      while (timeSlices.last.compareTo(endTime) <= 0) {
-        val dateBetween = Calendar.getInstance()
-        dateBetween.setTime(timeSlices.last.getTime)
-        dateBetween.add(Calendar.MONTH, 1)
-        timeSlices += dateBetween
-      }
-
-      timeSlices.sliding(2).toList.map(l => TimeRange(l.head, l.last))
-
+      TimeRange(startTime, endTime).slice(Period.ofMonths(1))
     }).getOrElse(List[TimeRange]())
   }
 
@@ -159,8 +139,8 @@ object Extract {
       }.toMap
     }
 
-    val startDate = new java.sql.Date(timeRange.start.getTimeInMillis)
-    val endDate = new java.sql.Date(timeRange.end.getTimeInMillis)
+    val startDate = new java.sql.Date(Helper.localDateTimeToMillis(timeRange.start))
+    val endDate = new java.sql.Date(Helper.localDateTimeToMillis(timeRange.end))
 
     val statement = connection.createStatement()
 
@@ -171,6 +151,24 @@ object Extract {
     val resultSet = statement.executeQuery(query)
 
     TableData(tableMetadata, iterateOverResultSet(resultSet, TableData.tuples(), tableDataReader))
+
+  }
+
+  def customTimeIntervals: List[TimeRange] = {
+    val years = 2012 to LocalDateTime.now().getYear
+    val months = List(Month.NOVEMBER, Month.MARCH, Month.JULY)
+
+    (for {
+      y <- years
+      m <- months
+    } yield {
+
+      val start = LocalDateTime.of(y, m.getValue, 1, 0, 0)
+      val end = start.plus(Period.ofMonths(1))
+
+      TimeRange(start, end)
+
+    }).toList
 
   }
 

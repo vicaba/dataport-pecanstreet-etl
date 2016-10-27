@@ -22,7 +22,7 @@ object DataType {
   case object String extends DataType
 
   /**
-    * Should map to java Calendar
+    * Should map to java LocalDateTime
     */
   case object Timestamp extends DataType
 }

@@ -1,6 +1,7 @@
 package lasalle.dataportpecanstreet.transform
 
 
+import java.time.{LocalDateTime, ZoneOffset}
 import java.util.Calendar
 
 import com.typesafe.scalalogging.Logger
@@ -47,7 +48,7 @@ object Transform {
   def getFieldWithDataType(dataType: DataType, value: Any): BSONValue = dataType match {
       case DataType.Integer => BSONInteger(value.asInstanceOf[Int])
       case DataType.Decimal => BSONDouble(value.asInstanceOf[Double])
-      case DataType.Timestamp => BSONDateTime(value.asInstanceOf[Calendar].getTimeInMillis)
+      case DataType.Timestamp => BSONDateTime(value.asInstanceOf[LocalDateTime].toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli)
       case _ => BSONString(value.toString)
     }
 

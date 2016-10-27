@@ -1,11 +1,17 @@
 package lasalle.dataportpecanstreet.extract.time
 
-import java.time.temporal.{ChronoUnit, TemporalUnit}
-import java.time.{Duration, LocalDateTime, Period}
-import java.util.Calendar
+import java.sql.Timestamp
+import java.time.{LocalDateTime, Period, ZoneOffset}
 
 import scala.annotation.tailrec
-import scala.collection.mutable.ListBuffer
+
+object Helper {
+
+  def sqlTimestampToLocalTimeDate(t: Timestamp): LocalDateTime = t.toLocalDateTime
+
+  def localDateTimeToMillis(t: LocalDateTime): Long = t.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli
+
+}
 
 case class TimeRange(start: LocalDateTime, end: LocalDateTime) {
 

@@ -3,6 +3,7 @@ package lasalle.dataportpecanstreet
 import com.typesafe.scalalogging.Logger
 import lasalle.dataportpecanstreet.extract.Extract
 import lasalle.dataportpecanstreet.extract.table.TableMetadata
+import lasalle.dataportpecanstreet.extract.time.Helper
 import lasalle.dataportpecanstreet.transform.Transform
 import org.slf4j.LoggerFactory
 import play.api.libs.json.Json
@@ -28,9 +29,10 @@ object ETL {
         logger.info("Table {}", tableMetadata.table)
         Extract.guessTimeColumn(tableMetadata.metadata.map(_.name)).map { timeColumn =>
           logger.info("Time Column: {}", timeColumn)
-          Extract.generateTimeIntervals(tableMetadata, timeColumn, connection).map { timeRange =>
+          Extract.customTimeIntervals.map { timeRange =>
+            println(timeRange)
             val res = Extract.retrieveTableData(tableMetadata, timeColumn, timeRange, connection)
-            logger.info("Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}", res.tableData.length.toString, timeRange.start.getTimeInMillis.toString, timeRange.end.getTimeInMillis.toString)
+            logger.info("Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}", res.tableData.length.toString, Helper.localDateTimeToMillis(timeRange.start).toString, Helper.localDateTimeToMillis(timeRange.end).toString)
             val json = Transform.rowsToJsonObject(res.tableData)
             json.foreach { j =>
               println(Json.prettyPrint(j))
