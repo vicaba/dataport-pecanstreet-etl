@@ -1,25 +1,30 @@
 package lasalle.dataportpecanstreet
 
-import com.typesafe.config.ConfigFactory
+import com.typesafe.config.{Config, ConfigFactory}
+import scala.collection.JavaConverters._
 
 /**
   * Created by vicaba on 04/10/2016.
   */
 object Config {
 
-  val config = ConfigFactory.load("reference.conf")
+  val config: Config = ConfigFactory.load("reference.conf")
 
   object Credentials {
-    val username = config.getString("SQL.username")
-    val password = config.getString("SQL.password")
+    val username: String = config.getString("SQL.username")
+    val password: String = config.getString("SQL.password")
   }
 
-  object Server {
-    val hostname = config.getString("SQL.server.hostname")
-    val port = config.getString("SQL.server.port")
-    val database = config.getString("SQL.server.database")
-    val schema = config.getString("SQL.server.schema")
-
+  object PostgreSqlServer {
+    val hostname: String = config.getString("SQL.server.hostname")
+    val port: String = config.getString("SQL.server.port")
+    val database: String = config.getString("SQL.server.database")
+    val schema: String = config.getString("SQL.server.schema")
+  }
+  
+  object MongodbServer {
+    val servers: List[String] = config.getStringList("mongodb.servers").asScala.toList
+    val db: String = config.getString("mongodb.db")
   }
 
 }

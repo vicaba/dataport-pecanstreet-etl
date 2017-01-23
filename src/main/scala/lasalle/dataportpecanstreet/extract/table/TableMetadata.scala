@@ -4,7 +4,7 @@ import scala.collection.mutable
 
 case class TableMetadata(table: String, metadata: Iterable[ColumnMetadata]) {
 
-  var fieldNameToColumnMetadata: scala.collection.mutable.Map[String, ColumnMetadata] = _
+  private var fieldNameToColumnMetadata: scala.collection.mutable.Map[String, ColumnMetadata] = _
 
   def columnMetadataForFieldName(field: String): Option[ColumnMetadata] = {
     if (fieldNameToColumnMetadata == null) fieldNameToColumnMetadata = mutable.Map[String, ColumnMetadata]()

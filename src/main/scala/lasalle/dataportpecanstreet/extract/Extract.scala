@@ -76,7 +76,7 @@ object Extract {
     val tableColumnQuery = (table: String) =>
       s"select $ColumnNameColumn, $DataTypeColumn " +
         s"from information_schema.columns " +
-        s"where table_schema = '${Config.Server.schema}' and table_name = '${table}'"
+        s"where table_schema = '${Config.PostgreSqlServer.schema}' and table_name = '${table}'"
 
     def tableColumnReader(resultSet: ResultSet, accum: Set[ColumnMetadata]): Set[ColumnMetadata] =
       (for {
@@ -102,7 +102,7 @@ object Extract {
 
       val startTimeQuery =
         s"select * " +
-          s"from ${Config.Server.schema}.$table " +
+          s"from ${Config.PostgreSqlServer.schema}.$table " +
           s"order by $timeColumn ASC limit 1"
 
       val resultSet = connection.createStatement().executeQuery(startTimeQuery)
@@ -114,7 +114,7 @@ object Extract {
 
       val endTimeQuery =
         s"select * " +
-          s"from ${Config.Server.schema}.$table " +
+          s"from ${Config.PostgreSqlServer.schema}.$table " +
           s"order by $timeColumn DESC limit 1"
 
       val resultSet = connection.createStatement().executeQuery(endTimeQuery)
@@ -145,7 +145,7 @@ object Extract {
     val statement = connection.createStatement()
 
     val query = s"select * " +
-      s"from ${Config.Server.schema}.${tableMetadata.table} " +
+      s"from ${Config.PostgreSqlServer.schema}.${tableMetadata.table} " +
       s"where $timeColumn between '$startDate' and '$endDate'"
 
     val resultSet = statement.executeQuery(query)
@@ -155,6 +155,7 @@ object Extract {
   }
 
   def customTimeIntervals: List[TimeRange] = {
+
     val years = 2012 to LocalDateTime.now().getYear
     val months = List(Month.NOVEMBER, Month.MARCH, Month.JULY)
 
@@ -164,11 +165,29 @@ object Extract {
     } yield {
 
       val start = LocalDateTime.of(y, m.getValue, 1, 0, 0)
-      val end = start.plus(Period.ofMonths(1))
 
-      TimeRange(start, end)
+      val timeRange1 = TimeRange(
+        start,
+        start.plus(Period.ofDays(10))
+      )
 
-    }).toList
+      val timeRange2 = TimeRange(
+        timeRange1.end.plus(Period.ofDays(1)),
+        timeRange1.end.plus(Period.ofDays(10))
+      )
+
+      val timeRange3 = TimeRange(
+        timeRange2.end.plus(Period.ofDays(1)),
+        timeRange1.start.plus(Period.ofMonths(1))
+      )
+
+      List(
+        timeRange1,
+        timeRange2,
+        timeRange3
+      )
+
+    }).toList.flatten
 
   }
 

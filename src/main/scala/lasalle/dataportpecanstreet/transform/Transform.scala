@@ -27,14 +27,14 @@ object Transform {
 
   def rowsToJsonObject(rows: TableData.Rows): List[JsObject] = rows.map(rowToJsonObject)
 
-  def rowToBsonDocument(row: TableData.Row)(tableMetadata: TableMetadata): BSONDocument =
+  def rowToBsonDocument(row: TableData.Row)(tableMetadata: TableMetadata): BSONDocument = {
+    logger.info("Translating Row to BSON")
     row.map {
       case (field, value) => tupleToBsonDocument(tableMetadata, field, value)
     }.reduce(_ ++ _)
+  }
 
   def rowsToBsonDocument(rows: TableData.Rows)(tableMetadata: TableMetadata): List[BSONDocument] = rows.map(rowToBsonDocument(_)(tableMetadata))
-
-
 
   def tupleToBsonDocument(tableMetadata: TableMetadata, field: String, value: TableData.Value): BSONDocument =
     (for {
@@ -47,7 +47,7 @@ object Transform {
 
   def getFieldWithDataType(dataType: DataType, value: Any): BSONValue = dataType match {
       case DataType.Integer => BSONInteger(value.asInstanceOf[Int])
-      case DataType.Decimal => BSONDouble(value.asInstanceOf[Double])
+      case DataType.Decimal => BSONDouble(value.asInstanceOf[java.math.BigDecimal].doubleValue())
       case DataType.Timestamp => BSONDateTime(value.asInstanceOf[LocalDateTime].toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli)
       case _ => BSONString(value.toString)
     }

@@ -1,4 +1,0 @@
-2016-10-27 17:30:52,794 [INFO] from ETL in main - Table electricity_egauge_hours
-2016-10-27 17:30:52,803 [INFO] from ETL in main - Time Column: localhour
-2016-10-27 17:37:18,810 [INFO] from ETL in main - Extracted. rows: 128723; timeRange.start: 1351728000000; timeRange.end: 1354320000000
-2016-10-27 17:37:38,704 [INFO] from ETL in main - Extracted. rows: 2062; timeRange.start: 1330560000000; timeRange.end: 1333238400000

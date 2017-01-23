@@ -2,7 +2,7 @@ package lasalle.dataportpecanstreet
 
 import java.sql.{Connection, DriverManager}
 
-import lasalle.dataportpecanstreet.Config.{Credentials, Server}
+import lasalle.dataportpecanstreet.Config.{Credentials, PostgreSqlServer}
 
 import scala.util.{Failure, Success, Try}
 
@@ -21,7 +21,7 @@ object Connection {
       case Success(_) =>
         Try {
           DriverManager.getConnection(
-            s"jdbc:postgresql://${Server.hostname}:${Server.port}/${Server.database}?currentSchema=${Server.schema}",
+            s"jdbc:postgresql://${PostgreSqlServer.hostname}:${PostgreSqlServer.port}/${PostgreSqlServer.database}?currentSchema=${PostgreSqlServer.schema}",
             Credentials.username, Credentials.password)
         } match {
           case f @ Failure(e) =>
