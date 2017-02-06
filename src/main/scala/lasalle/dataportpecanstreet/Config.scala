@@ -1,14 +1,11 @@
 package lasalle.dataportpecanstreet
 
-import com.typesafe.config.{Config, ConfigFactory}
+import com.typesafe.config.{Config => Conf, ConfigFactory}
 import scala.collection.JavaConverters._
 
-/**
-  * Created by vicaba on 04/10/2016.
-  */
 object Config {
 
-  val config: Config = ConfigFactory.load("reference.conf")
+  val config: Conf = ConfigFactory.load()
 
   object Credentials {
     val username: String = config.getString("SQL.username")

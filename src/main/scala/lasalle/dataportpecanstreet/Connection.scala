@@ -1,6 +1,6 @@
 package lasalle.dataportpecanstreet
 
-import java.sql.{Connection, DriverManager}
+import java.sql.{Connection => SQLConnection, DriverManager}
 
 import lasalle.dataportpecanstreet.Config.{Credentials, PostgreSqlServer}
 
@@ -11,7 +11,7 @@ object Connection {
 
   val DriverName = "org.postgresql.Driver"
 
-  def connect(): Try[Connection] = {
+  def connect(): Try[SQLConnection] = {
 
     Try(Class.forName(DriverName)) match {
       case Failure(e) =>
@@ -28,7 +28,7 @@ object Connection {
             println("Can't establish connection")
             e.printStackTrace(System.err)
             f
-          case s: Success[Connection] => s
+          case s: Success[SQLConnection] => s
         }
     }
   }

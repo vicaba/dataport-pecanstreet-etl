@@ -90,7 +90,6 @@ object Extract {
 
     val resultSet = statement.executeQuery(tableColumnQuery(tableName))
     val res = iterateOverResultSet(resultSet, Set[ColumnMetadata](), tableColumnReader)
-    println(res)
     res
   }
 

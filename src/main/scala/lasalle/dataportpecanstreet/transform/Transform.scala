@@ -28,7 +28,7 @@ object Transform {
   def rowsToJsonObject(rows: TableData.Rows): List[JsObject] = rows.map(rowToJsonObject)
 
   def rowToBsonDocument(row: TableData.Row)(tableMetadata: TableMetadata): BSONDocument = {
-    logger.info("Translating Row to BSON")
+    logger.debug("Translating Row to BSON")
     row.map {
       case (field, value) => tupleToBsonDocument(tableMetadata, field, value)
     }.reduce(_ ++ _)

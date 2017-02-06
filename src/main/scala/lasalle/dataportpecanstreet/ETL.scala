@@ -4,7 +4,7 @@ import com.typesafe.scalalogging.Logger
 import lasalle.dataportpecanstreet.extract.Extract
 import lasalle.dataportpecanstreet.extract.table.TableMetadata
 import lasalle.dataportpecanstreet.extract.time.Helper
-import lasalle.dataportpecanstreet.load.Load
+import lasalle.dataportpecanstreet.load.{Load, MongoEnvironment}
 import lasalle.dataportpecanstreet.transform.Transform
 
 import scala.concurrent.{Await, Future}
@@ -18,31 +18,36 @@ object ETL {
   def main(args: Array[String]): Unit = {
     lasalle.dataportpecanstreet.Connection.connect().map { connection =>
 
+      logger.info("Configuration settings: {}", Config.config.toString)
+
       val tables = Set("electricity_egauge_hours")
-      tables.foreach(println)
-      println(tables.count(_ => true))
+      logger.info("tables: {}", tables.toString)
+
       val tablesMetadata = tables
         .map { tableName => tableName -> Extract.retrieveColumnMetadata(tableName, connection) }
         .map { case (tableName, metadata) => TableMetadata(tableName, metadata) }
 
-      println(Extract.customTimeIntervals)
-
-      val res = tablesMetadata.flatMap { tableMetadata =>
-        logger.info("Table {}", tableMetadata.table)
-        Extract.guessTimeColumn(tableMetadata.metadata.map(_.name)).map { timeColumn =>
-          logger.info("Time Column: {}", timeColumn)
+      val res = tablesMetadata.flatMap { currentTableMetadata =>
+        logger.info("Table: {}", currentTableMetadata.table)
+        logger.info("Table columns: {}", currentTableMetadata.metadata)
+        Extract.guessTimeColumn(currentTableMetadata.metadata.map(_.name)).map { guessedTimeColumn =>
+          logger.info("Time Column: {}", guessedTimeColumn)
           Extract.customTimeIntervals.map { timeRange =>
-            val res = Extract.retrieveTableData(tableMetadata, timeColumn, timeRange, connection)
-            logger.info("Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}", res.tableData.length.toString, Helper.localDateTimeToMillis(timeRange.start).toString, Helper.localDateTimeToMillis(timeRange.end).toString)
-            val json = Transform.rowsToBsonDocument(res.tableData)(tableMetadata)
-
-            Load.load(tableMetadata, json)
+            val res = Extract.retrieveTableData(currentTableMetadata, guessedTimeColumn, timeRange, connection)
+            logger.info(
+              "Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}"
+              , res.tableData.length.toString
+              , Helper.localDateTimeToMillis(timeRange.start).toString
+              , Helper.localDateTimeToMillis(timeRange.end).toString
+            )
+            val bson = Transform.rowsToBsonDocument(res.tableData)(currentTableMetadata)
+            Load.load(currentTableMetadata, bson)
           }
         }
       }
 
-      val res2 = res.map(Future.sequence(_))
-      res2.foreach(_.foreach(_.foreach(println)))
+      res.map(Future.sequence(_))
+      logger.info("Program finished")
 
       connection.close()
     } recover {
