@@ -1,16 +1,15 @@
 package lasalle.dataportpecanstreet.extract.time
 
-import java.sql.Timestamp
-import java.time.{LocalDateTime, Period, ZoneOffset}
+import java.time.{LocalDate, Period}
 
 import scala.annotation.tailrec
 
-case class TimeRange(start: LocalDateTime, end: LocalDateTime) {
+case class DateRange(start: LocalDate, end: LocalDate) {
 
   def slice(period: Period): List[TimeRange] = {
 
     @tailrec
-    def _slice(start: LocalDateTime, end: LocalDateTime, slices: List[TimeRange]): List[TimeRange] = {
+    def _slice(start: LocalDate, end: LocalDate, slices: List[TimeRange]): List[TimeRange] = {
       val shift = start.plus(period)
       shift.compareTo(end) match {
         case x if x > 0 => slices
@@ -31,13 +30,10 @@ case class TimeRange(start: LocalDateTime, end: LocalDateTime) {
 
 object Main {
   def main(args: Array[String]): Unit = {
-    val now = LocalDateTime.now()
+    val now = LocalDate.now()
     val future = now.plusMonths(10)
     println(now)
     println(future)
     println(TimeRange(now, future).slice(Period.ofMonths(1)))
   }
 }
-
-
-

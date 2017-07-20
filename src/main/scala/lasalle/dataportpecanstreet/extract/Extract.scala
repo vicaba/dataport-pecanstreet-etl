@@ -4,12 +4,13 @@ package lasalle.dataportpecanstreet.extract
 import java.sql.{Connection, ResultSet, Timestamp}
 import java.time.temporal.ChronoUnit
 import java.time.{Duration, LocalDate, LocalDateTime, Month, Period, ZoneId, ZoneOffset}
+import java.util
 import java.util.{Calendar, Date}
 
 import com.typesafe.scalalogging.Logger
 import lasalle.dataportpecanstreet.Config
 import lasalle.dataportpecanstreet.extract.table.{ColumnMetadata, DataType, TableData, TableMetadata}
-import lasalle.dataportpecanstreet.extract.time.{Helper, TimeRange}
+import lasalle.dataportpecanstreet.extract.time.{DateRange, Helper, TimeRange}
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
@@ -160,17 +161,20 @@ object Extract {
     val months = List(Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, Month.DECEMBER)
 
 
-    def timeRanges(year: Int, month: Month, minimumSlicesPerMonth: Int): List[TimeRange] = {
-
+    def monthRange(year: Int, month: Month): DateRange = {
       val start = LocalDate.of(year, month, 1)
       val end = LocalDate.of(
         if (month != Month.DECEMBER) year else year + 1,
         month.plus(1),
         1
       )
+      DateRange(start, end)
+    }
 
-      val periodInDays = ChronoUnit.DAYS.between(start, end).toInt
+    def timeRanges(year: Int, month: Month, minimumSlicesPerMonth: Int): List[TimeRange] = {
 
+      val monthBounds = monthRange(year, month)
+      val periodInDays = ChronoUnit.DAYS.between(monthBounds.start, monthBounds.end).toInt
       val slices = (0 until periodInDays by (periodInDays / minimumSlicesPerMonth)) :+ periodInDays
 
       println(year)
@@ -184,6 +188,13 @@ object Extract {
           LocalDateTime.of(year, month, range.last, 0, 0)
         )
       }.toList
+    }
+
+    def timeRangesDaysInMonth(year: Int, month: Month): List[TimeRange] = {
+      val monthBounds = monthRange(year, month)
+      val periodInDays = ChronoUnit.DAYS.between(monthBounds.start, monthBounds.end).toInt
+
+      timeRanges(year, month, periodInDays)
     }
 
 

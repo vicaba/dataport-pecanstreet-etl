@@ -37,8 +37,8 @@ object ETL {
             logger.info(
               "Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}"
               , res.tableData.length.toString
-              , Helper.localDateTimeToMillis(timeRange.start).toString
-              , Helper.localDateTimeToMillis(timeRange.end).toString
+              , timeRange.start.toString
+              , timeRange.end.toString
             )
             val bson = Transform.rowsToBsonDocument(res.tableData)(currentTableMetadata)
             Load.load(currentTableMetadata, bson)
