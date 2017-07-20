@@ -7,7 +7,7 @@ import java.util.Calendar
 import com.typesafe.scalalogging.Logger
 import lasalle.dataportpecanstreet.extract.table.{ColumnMetadata, DataType, TableData, TableMetadata}
 import play.api.libs.json.{JsObject, Json}
-import reactivemongo.bson.{BSONDateTime, BSONDocument, BSONDouble, BSONInteger, BSONNumberLike, BSONString, BSONValue}
+import reactivemongo.bson.{BSONDateTime, BSONDocument, BSONDouble, BSONInteger, BSONNull, BSONNumberLike, BSONString, BSONValue}
 
 
 object Transform {
@@ -42,7 +42,7 @@ object Transform {
       v <- value
     } yield {
       BSONDocument(field -> getFieldWithDataType(cm._type, v))
-    }).getOrElse(BSONDocument())
+    }).getOrElse(BSONDocument(field -> BSONNull))
 
 
   def getFieldWithDataType(dataType: DataType, value: Any): BSONValue = dataType match {

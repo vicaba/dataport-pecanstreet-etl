@@ -2,7 +2,8 @@ package lasalle.dataportpecanstreet.extract
 
 
 import java.sql.{Connection, ResultSet, Timestamp}
-import java.time.{LocalDateTime, Period, ZoneId, ZoneOffset, Month}
+import java.time.temporal.ChronoUnit
+import java.time.{Duration, LocalDate, LocalDateTime, Month, Period, ZoneId, ZoneOffset}
 import java.util.{Calendar, Date}
 
 import com.typesafe.scalalogging.Logger
@@ -155,37 +156,42 @@ object Extract {
 
   def customTimeIntervals: List[TimeRange] = {
 
-    val years = 2012 to LocalDateTime.now().getYear
-    val months = List(Month.NOVEMBER, Month.MARCH, Month.JULY)
+    val years = 2012 to LocalDate.now().getYear
+    val months = List(Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, Month.DECEMBER)
+
+
+    def timeRanges(year: Int, month: Month, minimumSlicesPerMonth: Int): List[TimeRange] = {
+
+      val start = LocalDate.of(year, month, 1)
+      val end = LocalDate.of(
+        if (month != Month.DECEMBER) year else year + 1,
+        month.plus(1),
+        1
+      )
+
+      val periodInDays = ChronoUnit.DAYS.between(start, end).toInt
+
+      val slices = (0 until periodInDays by (periodInDays / minimumSlicesPerMonth)) :+ periodInDays
+
+      println(year)
+      println(month)
+      println(slices)
+
+      slices.
+        sliding(size = 2, step = 1).map { range =>
+        TimeRange(
+          LocalDateTime.of(year, month, range.head + 1, 0, 0),
+          LocalDateTime.of(year, month, range.last, 0, 0)
+        )
+      }.toList
+    }
+
 
     (for {
       y <- years
       m <- months
     } yield {
-
-      val start = LocalDateTime.of(y, m.getValue, 1, 0, 0)
-
-      val timeRange1 = TimeRange(
-        start,
-        start.plus(Period.ofDays(10))
-      )
-
-      val timeRange2 = TimeRange(
-        timeRange1.end.plus(Period.ofDays(1)),
-        timeRange1.end.plus(Period.ofDays(10))
-      )
-
-      val timeRange3 = TimeRange(
-        timeRange2.end.plus(Period.ofDays(1)),
-        timeRange1.start.plus(Period.ofMonths(1))
-      )
-
-      List(
-        timeRange1,
-        timeRange2,
-        timeRange3
-      )
-
+      timeRanges(y, m, 10)
     }).toList.flatten
 
   }

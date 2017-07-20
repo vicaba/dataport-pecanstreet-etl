@@ -29,7 +29,7 @@ object ETL {
 
       val res = tablesMetadata.flatMap { currentTableMetadata =>
         logger.info("Table: {}", currentTableMetadata.table)
-        logger.info("Table columns: {}", currentTableMetadata.metadata)
+        logger.info("Table columns: {}", currentTableMetadata.metadata.map(c => c.name).mkString(","))
         Extract.guessTimeColumn(currentTableMetadata.metadata.map(_.name)).map { guessedTimeColumn =>
           logger.info("Time Column: {}", guessedTimeColumn)
           Extract.customTimeIntervals.map { timeRange =>
