@@ -24,4 +24,9 @@ object Config {
     val db: String = config.getString("mongodb.db")
   }
 
+  object Extract {
+    val from: Set[String] = config.getStringList("extract.from").asScala.toSet
+    val batchInterval: Long = config.getLong("extract.batchInterval")
+  }
+
 }

@@ -13,28 +13,28 @@ import scala.concurrent.ExecutionContext.Implicits._
 
 object ETL {
 
-  val logger = Logger("ETL")
+  val l = Logger("ETL")
 
   def main(args: Array[String]): Unit = {
     lasalle.dataportpecanstreet.Connection.connect().map { connection =>
 
-      logger.info("Configuration settings: {}", Config.config.toString)
+      l.info("Configuration settings: {}", Config.config.toString)
 
-      val tables = Set("electricity_egauge_hours")
-      logger.info("tables: {}", tables.toString)
+      val tables = Config.Extract.from
+      l.info("tables: {}", tables.toString)
 
       val tablesMetadata = tables
         .map { tableName => tableName -> Extract.retrieveColumnMetadata(tableName, connection) }
         .map { case (tableName, metadata) => TableMetadata(tableName, metadata) }
 
       val res = tablesMetadata.flatMap { currentTableMetadata =>
-        logger.info("Table: {}", currentTableMetadata.table)
-        logger.info("Table columns: {}", currentTableMetadata.metadata.map(c => c.name).mkString(","))
+        l.info("Table: {}", currentTableMetadata.table)
+        l.info("Table columns: {}", currentTableMetadata.metadata.map(c => c.name).mkString(","))
         Extract.guessTimeColumn(currentTableMetadata.metadata.map(_.name)).map { guessedTimeColumn =>
-          logger.info("Time Column: {}", guessedTimeColumn)
-          Extract.customTimeIntervals.map { timeRange =>
+          l.info("Time Column: {}", guessedTimeColumn)
+          Extract.customTimeIntervals.reverse.map { timeRange =>
             val res = Extract.retrieveTableData(currentTableMetadata, guessedTimeColumn, timeRange, connection)
-            logger.info(
+            l.info(
               "Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}"
               , res.tableData.length.toString
               , timeRange.start.toString
@@ -47,7 +47,7 @@ object ETL {
       }
 
       res.map(Future.sequence(_))
-      logger.info("Program finished")
+      l.info("Program finished")
 
       connection.close()
     } recover {

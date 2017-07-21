@@ -6,8 +6,8 @@ object TableData {
   type Row = Map[String, Value]
   type Rows = List[Row]
 
-  def tuple() = Map[String, Value]()
-  def tuples() = List[Row]()
+  def emptyTuple() = Map[String, Value]()
+  def emptyTuples() = List[Row]()
 
 }
 

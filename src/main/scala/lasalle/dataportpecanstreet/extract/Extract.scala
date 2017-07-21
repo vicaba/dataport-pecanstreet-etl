@@ -2,7 +2,7 @@ package lasalle.dataportpecanstreet.extract
 
 
 import java.sql.{Connection, ResultSet, Timestamp}
-import java.time.temporal.ChronoUnit
+import java.time.temporal.{ChronoUnit, TemporalUnit}
 import java.time.{Duration, LocalDate, LocalDateTime, Month, Period, ZoneId, ZoneOffset}
 import java.util
 import java.util.{Calendar, Date}
@@ -10,7 +10,7 @@ import java.util.{Calendar, Date}
 import com.typesafe.scalalogging.Logger
 import lasalle.dataportpecanstreet.Config
 import lasalle.dataportpecanstreet.extract.table.{ColumnMetadata, DataType, TableData, TableMetadata}
-import lasalle.dataportpecanstreet.extract.time.{DateRange, Helper, TimeRange}
+import lasalle.dataportpecanstreet.extract.time.{DateRange, DateTimeRange, Helper}
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
@@ -97,41 +97,7 @@ object Extract {
 
   def guessTimeColumn(columns: Iterable[String]): Option[String] = columns.find(_.startsWith("local"))
 
-  def generateTimeIntervals(tableMetadata: TableMetadata, timeColumn: String, connection: Connection): List[TimeRange] = {
-
-    def retrieveStartTime(table: String, timeColumn: String): Option[Timestamp] = {
-
-      val startTimeQuery =
-        s"select * " +
-          s"from ${Config.PostgreSqlServer.schema}.$table " +
-          s"order by $timeColumn ASC limit 1"
-
-      val resultSet = connection.createStatement().executeQuery(startTimeQuery)
-      if (resultSet.next()) Some(resultSet.getTimestamp(timeColumn)) else None
-
-    }
-
-    def retrieveEndTime(table: String, timeColumn: String): Option[Timestamp] = {
-
-      val endTimeQuery =
-        s"select * " +
-          s"from ${Config.PostgreSqlServer.schema}.$table " +
-          s"order by $timeColumn DESC limit 1"
-
-      val resultSet = connection.createStatement().executeQuery(endTimeQuery)
-      if (resultSet.next()) Some(resultSet.getTimestamp(timeColumn)) else None
-
-    }
-
-    (for {
-      startTime <- retrieveStartTime(tableMetadata.table, timeColumn).map(Helper.sqlTimestampToLocalTimeDate)
-      endTime <- retrieveEndTime(tableMetadata.table, timeColumn).map(Helper.sqlTimestampToLocalTimeDate)
-    } yield {
-      TimeRange(startTime, endTime).slice(Period.ofMonths(1))
-    }).getOrElse(List[TimeRange]())
-  }
-
-  def retrieveTableData(tableMetadata: TableMetadata, timeColumn: String, timeRange: TimeRange, connection: Connection): TableData = {
+  def retrieveTableData(tableMetadata: TableMetadata, timeColumn: String, timeRange: DateTimeRange, connection: Connection): TableData = {
 
     def tableDataReader(resultSet: ResultSet, accum: TableData.Rows): TableData.Rows = {
       accum :+ tableMetadata.metadata.map { field =>
@@ -151,59 +117,19 @@ object Extract {
 
     val resultSet = statement.executeQuery(query)
 
-    TableData(tableMetadata, iterateOverResultSet(resultSet, TableData.tuples(), tableDataReader))
+    TableData(tableMetadata, iterateOverResultSet(resultSet, TableData.emptyTuples(), tableDataReader))
 
   }
 
-  def customTimeIntervals: List[TimeRange] = {
+  def customTimeIntervals: List[DateTimeRange] = {
 
-    val years = 2012 to LocalDate.now().getYear
-    val months = List(Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, Month.DECEMBER)
+    val startYear = 2012
+    val end = LocalDate.now()
 
-
-    def monthRange(year: Int, month: Month): DateRange = {
-      val start = LocalDate.of(year, month, 1)
-      val end = LocalDate.of(
-        if (month != Month.DECEMBER) year else year + 1,
-        month.plus(1),
-        1
-      )
-      DateRange(start, end)
-    }
-
-    def timeRanges(year: Int, month: Month, minimumSlicesPerMonth: Int): List[TimeRange] = {
-
-      val monthBounds = monthRange(year, month)
-      val periodInDays = ChronoUnit.DAYS.between(monthBounds.start, monthBounds.end).toInt
-      val slices = (0 until periodInDays by (periodInDays / minimumSlicesPerMonth)) :+ periodInDays
-
-      println(year)
-      println(month)
-      println(slices)
-
-      slices.
-        sliding(size = 2, step = 1).map { range =>
-        TimeRange(
-          LocalDateTime.of(year, month, range.head + 1, 0, 0),
-          LocalDateTime.of(year, month, range.last, 0, 0)
-        )
-      }.toList
-    }
-
-    def timeRangesDaysInMonth(year: Int, month: Month): List[TimeRange] = {
-      val monthBounds = monthRange(year, month)
-      val periodInDays = ChronoUnit.DAYS.between(monthBounds.start, monthBounds.end).toInt
-
-      timeRanges(year, month, periodInDays)
-    }
-
-
-    (for {
-      y <- years
-      m <- months
-    } yield {
-      timeRanges(y, m, 10)
-    }).toList.flatten
+    DateTimeRange(
+      LocalDateTime.of(startYear, 1, 1, 0, 0),
+      LocalDateTime.of(end.getYear, end.getMonth, end.getDayOfMonth, 23, 59)
+    ).slice(Duration.of(Config.Extract.batchInterval, ChronoUnit.SECONDS))
 
   }
 
