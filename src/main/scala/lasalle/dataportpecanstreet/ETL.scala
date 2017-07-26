@@ -1,15 +1,20 @@
 package lasalle.dataportpecanstreet
 
+import akka.typed.scaladsl.Actor
+import akka.typed.scaladsl.AskPattern._
+import akka.typed.{ActorRef, ActorSystem}
+import akka.util.Timeout
 import com.typesafe.scalalogging.Logger
+import lasalle.dataportpecanstreet.RowCounter._
 import lasalle.dataportpecanstreet.extract.Extract
 import lasalle.dataportpecanstreet.extract.table.TableMetadata
-import lasalle.dataportpecanstreet.extract.time.Helper
-import lasalle.dataportpecanstreet.load.{Load, MongoEnvironment}
+import lasalle.dataportpecanstreet.load.Load
 import lasalle.dataportpecanstreet.transform.Transform
 
-import scala.concurrent.{Await, Future}
-import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits._
+import scala.concurrent.duration._
+import scala.concurrent.{Await, Future}
+
 
 object ETL {
 
@@ -17,6 +22,13 @@ object ETL {
 
   def main(args: Array[String]): Unit = {
     lasalle.dataportpecanstreet.Connection.connect().map { connection =>
+
+      val (system, ref) = startRowCounterActorSystem()
+      l.info("Row counter Actor System started")
+
+      implicit val timeout: Timeout = Timeout(20.seconds)
+      implicit val scheduler = system.scheduler
+
 
       l.info("Configuration settings: {}", Config.config.toString)
 
@@ -40,6 +52,7 @@ object ETL {
               , timeRange.start.toString
               , timeRange.end.toString
             )
+            ref ! Add(res.tableData.length)
             val bson = Transform.rowsToBsonDocument(res.tableData)(currentTableMetadata)
             Load.load(currentTableMetadata, bson)
           }
@@ -47,12 +60,38 @@ object ETL {
       }
 
       res.map(Future.sequence(_))
-      l.info("Program finished")
+
+      val f: Future[Long] = ref ? Report
+
+      Await.ready(f, Duration.Inf)
+
+      f.map { res =>
+        l.info("Extraction and Load done. The database should contain {} rows.", res.toString)
+      }
+
+      l.info("Program finished. Shutting down...")
 
       connection.close()
+      System.exit(0)
+
     } recover {
       case t: Throwable => t.printStackTrace(System.err)
     }
+  }
+
+  private def startRowCounterActorSystem(): (ActorSystem[Nothing], ActorRef[RowCounterProtocol]) = {
+
+    implicit val timeout: Timeout = Timeout(5.seconds)
+
+    val root = Actor.deferred[Nothing] { ctx =>
+      Actor.empty
+    }
+
+    val system = ActorSystem[Nothing]("Counter", root)
+    val ref = Await.result(system.systemActorOf[RowCounterProtocol](rowCounterBehavior, "rowCounter"), Duration.Inf)
+
+    (system, ref)
+
   }
 
 }
