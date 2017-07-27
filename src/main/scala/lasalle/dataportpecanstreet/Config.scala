@@ -1,6 +1,7 @@
 package lasalle.dataportpecanstreet
 
-import com.typesafe.config.{Config => Conf, ConfigFactory}
+import com.typesafe.config.{ConfigFactory, Config => Conf}
+
 import scala.collection.JavaConverters._
 
 object Config {
@@ -24,9 +25,24 @@ object Config {
     val db: String = config.getString("mongodb.db")
   }
 
-  object Extract {
-    val from: Set[String] = config.getStringList("extract.from").asScala.toSet
-    val batchInterval: Long = config.getLong("extract.batchInterval")
+  object Etl {
+    val EtlKey = "etl"
+    val ExtractKey = "extract"
+    val LoadKey = "load"
+
+    object Extract {
+      val Key = s"$EtlKey.$ExtractKey"
+      val from: Set[String] = config.getStringList(s"$Key.from").asScala.toSet
+      val batchInterval: Long = config.getLong(s"$Key.batchInterval")
+    }
+
+    object Load {
+      val Key = s"$EtlKey.$LoadKey"
+      val metadata: Boolean =  config.getBoolean(s"$Key.metadata")
+    }
+
   }
+
+
 
 }
