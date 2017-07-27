@@ -8,7 +8,7 @@ import reactivemongo.api.commands.{MultiBulkWriteResult, WriteResult}
 import reactivemongo.bson.BSONDocument
 
 import scala.concurrent.ExecutionContext.Implicits._
-import scala.concurrent.{Await, ExecutionContext, ExecutionContextExecutor, Future}
+import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
 object Load {
 
@@ -21,11 +21,15 @@ object Load {
     collection.insert(tableData)
   }
 
-  def load(tableMetadata: TableMetadata, tableData: Iterable[BSONDocument]): Future[Iterable[WriteResult]] = {
+  def load(tableMetadata: TableMetadata, tableData: Iterable[BSONDocument]): Future[MultiBulkWriteResult] = {
 
     val collection: BSONCollection = MongoEnvironment.mainDb.collection(tableMetadata.table)
 
-    val it = tableData.map( d => this.load(tableMetadata, d))
-    Future.sequence(it)
+    val bulkDocs = tableData.map(implicitly[collection.ImplicitlyDocumentProducer](_)).toSeq
+
+    collection.bulkInsert(ordered = false)(bulkDocs: _*)
+
+    //val it = tableData.map( d => this.load(tableMetadata, d))
+    //Future.sequence(it)
   }
 }
