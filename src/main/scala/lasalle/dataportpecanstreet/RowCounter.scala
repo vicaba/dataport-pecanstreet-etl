@@ -9,10 +9,6 @@ object RowCounter {
 
   final case class Add(n: Long) extends RowCounterProtocol
 
-  /**
-   * Not Serializable!
-   *
-   */
   final case class Report(sendBackTo: ActorRef[Long]) extends RowCounterProtocol
 
   val rowCounterBehavior: Behavior[RowCounterProtocol] = rowCounterBehavior(0)

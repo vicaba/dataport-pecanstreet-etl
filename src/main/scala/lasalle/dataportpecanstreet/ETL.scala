@@ -40,21 +40,31 @@ object ETL {
         .map { case (tableName, metadata) => TableMetadata(tableName, metadata) }
 
       val res = tablesMetadata.flatMap { currentTableMetadata =>
+
         l.info("Table: {}", currentTableMetadata.table)
         l.info("Table columns: {}", currentTableMetadata.metadata.map(c => c.name).mkString(","))
+
         Load.loadMetadata(currentTableMetadata)
+
         Extract.guessTimeColumn(currentTableMetadata.metadata.map(_.name)).map { guessedTimeColumn =>
-          l.info("Time Column: {}", guessedTimeColumn)
+
+          l.debug("Time Column: {}", guessedTimeColumn)
+
           Extract.customTimeIntervals.reverse.map { timeRange =>
+
             val res = Extract.retrieveTableData(currentTableMetadata, guessedTimeColumn, timeRange, connection)
+
             l.info(
-              "Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}"
+              "Extracted. rows: {}; timeRange.start: {}; timeRange.end: {};"
               , res.rows.length.toString
               , timeRange.start.toString
               , timeRange.end.toString
             )
+
             ref ! Add(res.rows.length)
+            
             Load.load(currentTableMetadata, res.rows)
+
           }
         }
       }

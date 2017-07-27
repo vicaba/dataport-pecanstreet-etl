@@ -43,6 +43,7 @@ object Config {
 
   }
 
-
+  def execute[R](b: => Boolean)(default: R)(f: => R): R =
+    if (b()) f() else default
 
 }
