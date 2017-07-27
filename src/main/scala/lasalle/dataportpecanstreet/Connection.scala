@@ -15,7 +15,6 @@ object Connection {
 
     Try(Class.forName(DriverName)) match {
       case Failure(e) =>
-        println("Driver not found")
         e.printStackTrace(System.err)
         Failure(e)
       case Success(_) =>
@@ -25,10 +24,9 @@ object Connection {
             Credentials.username, Credentials.password)
         } match {
           case f @ Failure(e) =>
-            println("Can't establish connection")
             e.printStackTrace(System.err)
             f
-          case s: Success[SQLConnection] => s
+          case s: _ => s
         }
     }
   }

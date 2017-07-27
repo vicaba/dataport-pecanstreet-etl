@@ -1,35 +1,37 @@
 package lasalle.dataportpecanstreet.load
 
-import java.util.concurrent.Executors
 
-import lasalle.dataportpecanstreet.extract.table.TableMetadata
+import lasalle.dataportpecanstreet.extract.table.{TableData, TableMetadata}
+import lasalle.dataportpecanstreet.transform.Transform
 import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.api.commands.{MultiBulkWriteResult, WriteResult}
-import reactivemongo.bson.BSONDocument
 
 import scala.concurrent.ExecutionContext.Implicits._
-import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
+import scala.concurrent.Future
 
 object Load {
 
-  val BulkInsertLimit = 1000
-
-  val ec: ExecutionContextExecutor = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(10))
-
-  def load(tableMetadata: TableMetadata, tableData: BSONDocument): Future[WriteResult] = {
-    val collection: BSONCollection = MongoEnvironment.mainDb.collection(tableMetadata.table)
-    collection.insert(tableData)
+  def loadMetadata(tableMetadata: TableMetadata): Future[WriteResult] = {
+    val collection: BSONCollection = MongoEnvironment.mainDb.collection(tableMetadata.table + "_metadata")
+    collection.insert(Transform.columnsMetadataToBson(tableMetadata.metadata))
   }
 
-  def load(tableMetadata: TableMetadata, tableData: Iterable[BSONDocument]): Future[MultiBulkWriteResult] = {
+  def load(tableMetadata: TableMetadata, row: TableData.Row): Future[WriteResult] = {
+
+    val collection: BSONCollection = MongoEnvironment.mainDb.collection(tableMetadata.table)
+    collection.insert(
+      Transform.rowToBsonDocument(row)(tableMetadata)
+    )
+  }
+
+  def load(tableMetadata: TableMetadata, tableData: TableData.Rows): Future[MultiBulkWriteResult] = {
 
     val collection: BSONCollection = MongoEnvironment.mainDb.collection(tableMetadata.table)
 
-    val bulkDocs = tableData.map(implicitly[collection.ImplicitlyDocumentProducer](_)).toSeq
+    val bulkDocs = Transform.rowsToBsonDocument(tableData)(tableMetadata)
+      .map(implicitly[collection.ImplicitlyDocumentProducer](_))
 
     collection.bulkInsert(ordered = false)(bulkDocs: _*)
-
-    //val it = tableData.map( d => this.load(tableMetadata, d))
-    //Future.sequence(it)
   }
+
 }

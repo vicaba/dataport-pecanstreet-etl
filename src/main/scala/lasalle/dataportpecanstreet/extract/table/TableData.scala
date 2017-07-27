@@ -11,4 +11,4 @@ object TableData {
 
 }
 
-case class TableData(tableMetadata: TableMetadata, tableData: TableData.Rows)
+case class TableData(tableMetadata: TableMetadata, rows: TableData.Rows)

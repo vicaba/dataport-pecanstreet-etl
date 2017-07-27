@@ -52,4 +52,10 @@ object Transform {
       case _ => BSONString(value.toString)
     }
 
+  def columnMetadataToBson(columnMetadata: ColumnMetadata): BSONDocument =
+    BSONDocument(columnMetadata.name -> columnMetadata._type.toString)
+
+  def columnsMetadataToBson(columnsMetadata: Iterable[ColumnMetadata]): BSONDocument =
+    columnsMetadata.map(columnMetadataToBson).reduce(_ ++ _)
+
 }

@@ -78,7 +78,7 @@ object Extract {
     val tableColumnQuery = (table: String) =>
       s"select $ColumnNameColumn, $DataTypeColumn " +
         s"from information_schema.columns " +
-        s"where table_schema = '${Config.PostgreSqlServer.schema}' and table_name = '${table}'"
+        s"where table_schema = '${Config.PostgreSqlServer.schema}' and table_name = '$table'"
 
     def tableColumnReader(resultSet: ResultSet, accum: Set[ColumnMetadata]): Set[ColumnMetadata] =
       (for {
@@ -129,7 +129,7 @@ object Extract {
     DateTimeRange(
       LocalDateTime.of(startYear, 1, 1, 0, 0),
       LocalDateTime.of(end.getYear, end.getMonth, end.getDayOfMonth, 23, 59)
-    ).slice(Duration.of(Config.Extract.batchInterval, ChronoUnit.SECONDS))
+    ).slice(Duration.of(Config.Etl.Extract.batchInterval, ChronoUnit.SECONDS))
 
   }
 

@@ -9,7 +9,6 @@ import lasalle.dataportpecanstreet.RowCounter._
 import lasalle.dataportpecanstreet.extract.Extract
 import lasalle.dataportpecanstreet.extract.table.TableMetadata
 import lasalle.dataportpecanstreet.load.Load
-import lasalle.dataportpecanstreet.transform.Transform
 
 import scala.concurrent.ExecutionContext.Implicits._
 import scala.concurrent.duration._
@@ -21,19 +20,20 @@ object ETL {
   val l = Logger("ETL")
 
   def main(args: Array[String]): Unit = {
+
+    l.debug("Configuration settings: {}", Config.config.toString)
+
+    val tables = Config.Etl.Extract.from
+    l.info("tables: {}", tables.toString)
+
+    // Blocking operation
+    val (system, ref) = startRowCounterActorSystem()
+    l.info("Row counter Actor System started")
+
+    implicit val timeout: Timeout = Timeout(20.seconds)
+    implicit val scheduler = system.scheduler
+
     lasalle.dataportpecanstreet.Connection.connect().map { connection =>
-
-      val (system, ref) = startRowCounterActorSystem()
-      l.info("Row counter Actor System started")
-
-      implicit val timeout: Timeout = Timeout(20.seconds)
-      implicit val scheduler = system.scheduler
-
-
-      l.info("Configuration settings: {}", Config.config.toString)
-
-      val tables = Config.Extract.from
-      l.info("tables: {}", tables.toString)
 
       val tablesMetadata = tables
         .map { tableName => tableName -> Extract.retrieveColumnMetadata(tableName, connection) }
@@ -42,23 +42,24 @@ object ETL {
       val res = tablesMetadata.flatMap { currentTableMetadata =>
         l.info("Table: {}", currentTableMetadata.table)
         l.info("Table columns: {}", currentTableMetadata.metadata.map(c => c.name).mkString(","))
+        Load.loadMetadata(currentTableMetadata)
         Extract.guessTimeColumn(currentTableMetadata.metadata.map(_.name)).map { guessedTimeColumn =>
           l.info("Time Column: {}", guessedTimeColumn)
           Extract.customTimeIntervals.reverse.map { timeRange =>
             val res = Extract.retrieveTableData(currentTableMetadata, guessedTimeColumn, timeRange, connection)
             l.info(
               "Extracted. rows: {}; timeRange.start: {}; timeRange.end: {}"
-              , res.tableData.length.toString
+              , res.rows.length.toString
               , timeRange.start.toString
               , timeRange.end.toString
             )
-            ref ! Add(res.tableData.length)
-            val bson = Transform.rowsToBsonDocument(res.tableData)(currentTableMetadata)
-            Load.load(currentTableMetadata, bson)
+            ref ! Add(res.rows.length)
+            Load.load(currentTableMetadata, res.rows)
           }
         }
       }
 
+      // Reduce futures
       res.map(Future.sequence(_))
 
       val f: Future[Long] = ref ? Report
