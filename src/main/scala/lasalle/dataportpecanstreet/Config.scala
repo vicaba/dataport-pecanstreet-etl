@@ -3,6 +3,7 @@ package lasalle.dataportpecanstreet
 import com.typesafe.config.{ConfigFactory, Config => Conf}
 
 import scala.collection.JavaConverters._
+import scala.util.Try
 
 object Config {
 
