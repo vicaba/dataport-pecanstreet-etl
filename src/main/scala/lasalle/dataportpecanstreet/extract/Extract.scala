@@ -31,10 +31,20 @@ object Extract {
     case _ => DataType.String
   }
 
+  /**
+   *
+   * Get the value of a field according to its domain-encoded datatype.
+   *
+   * @param fieldName
+   * @param dataType
+   * @param resultSet
+   * @return
+   */
   def getFieldWithDataType(fieldName: String, dataType: DataType, resultSet: ResultSet): TableData.Value = {
 
     def sqlTimestampToCalendarDateOrNull(t: Timestamp) = if (t == null) t else Helper.sqlTimestampToLocalTimeDate(t)
 
+    // TODO: Return None if null
     dataType match {
       case DataType.Integer => Option(resultSet.getInt(fieldName))
       case DataType.Decimal => Option(resultSet.getBigDecimal(fieldName))
@@ -106,8 +116,8 @@ object Extract {
       }.toMap
     }
 
-    val startDate = new java.sql.Date(Helper.localDateTimeToMillis(timeRange.start))
-    val endDate = new java.sql.Date(Helper.localDateTimeToMillis(timeRange.end))
+    val startDate = new java.sql.Timestamp(Helper.localDateTimeToMillis(timeRange.start))
+    val endDate = new java.sql.Timestamp(Helper.localDateTimeToMillis(timeRange.end))
 
     val statement = connection.createStatement()
 
@@ -123,12 +133,12 @@ object Extract {
 
   def customTimeIntervals: List[DateTimeRange] = {
 
-    val startYear = 2012
-    val end = LocalDate.now()
+    val start = Config.Etl.Extract.fromTimestamp
+    val end = Config.Etl.Extract.toTimestamp
 
     DateTimeRange(
-      LocalDateTime.of(startYear, 1, 1, 0, 0),
-      LocalDateTime.of(end.getYear, end.getMonth, end.getDayOfMonth, 23, 59)
+      start
+      , end
     ).slice(Duration.of(Config.Etl.Extract.batchInterval, ChronoUnit.SECONDS))
 
   }

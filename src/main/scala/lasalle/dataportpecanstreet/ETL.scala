@@ -23,65 +23,71 @@ object ETL {
 
     l.debug("Configuration settings: {}", Config.config.toString)
 
-    val tables = Config.Etl.Extract.from
-    l.info("tables: {}", tables.toString)
+    val fromTableName = Config.Etl.Extract.from
+    l.info("From table: {}", fromTableName.toString)
+
+    val toTableName = Config.Etl.Load.to
+    l.info("To table: {}", toTableName.toString)
 
     // Blocking operation
     val (system, ref) = startRowCounterActorSystem()
     l.info("Row counter Actor System started")
+
+    l.info("To table: {}", toTableName.toString)
 
     implicit val timeout: Timeout = Timeout(20.seconds)
     implicit val scheduler = system.scheduler
 
     lasalle.dataportpecanstreet.Connection.connect().map { connection =>
 
-      val tablesMetadata = tables
-        .map { tableName => tableName -> Extract.retrieveColumnMetadata(tableName, connection) }
-        .map { case (tableName, metadata) => TableMetadata(tableName, metadata) }
+      val metadata = Extract.retrieveColumnMetadata(fromTableName, connection)
+      val currentTableMetadata = TableMetadata(fromTableName, metadata)
 
-      val res = tablesMetadata.flatMap { currentTableMetadata =>
+      l.info("Table: {}", currentTableMetadata.table)
+      l.info("Table columns: {}", currentTableMetadata.metadata.map(c => c.name).mkString(","))
 
-        l.info("Table: {}", currentTableMetadata.table)
-        l.info("Table columns: {}", currentTableMetadata.metadata.map(c => c.name).mkString(","))
+      Load.loadMetadata(currentTableMetadata, toTableName)
 
-        Load.loadMetadata(currentTableMetadata)
+      Extract.guessTimeColumn(currentTableMetadata.metadata.map(_.name)).map { guessedTimeColumn =>
 
-        Extract.guessTimeColumn(currentTableMetadata.metadata.map(_.name)).map { guessedTimeColumn =>
+        l.debug("Time Column: {}", guessedTimeColumn)
 
-          l.debug("Time Column: {}", guessedTimeColumn)
+        val futureBulks = Extract.customTimeIntervals.reverse.map { timeRange =>
 
-          Extract.customTimeIntervals.reverse.map { timeRange =>
+          val res = Extract.retrieveTableData(currentTableMetadata, guessedTimeColumn, timeRange, connection)
 
-            val res = Extract.retrieveTableData(currentTableMetadata, guessedTimeColumn, timeRange, connection)
+          l.info(
+            "Extracted. rows: {}; timeRange.start: {}; timeRange.end: {};"
+            , res.rows.length.toString
+            , timeRange.start.toString
+            , timeRange.end.toString
+          )
 
-            l.info(
-              "Extracted. rows: {}; timeRange.start: {}; timeRange.end: {};"
-              , res.rows.length.toString
-              , timeRange.start.toString
-              , timeRange.end.toString
-            )
+          ref ! Add(res.rows.length)
 
-            ref ! Add(res.rows.length)
-            
-            Load.load(currentTableMetadata, res.rows)
+          Load.load(currentTableMetadata, res.rows, toTableName)
 
-          }
         }
+
+        Future.sequence(futureBulks)
+
+      } match {
+        case Some(bulks) =>
+          Await.ready(bulks, Duration.Inf)
+
+          val f: Future[Long] = ref ? Report
+          Await.ready(f, Duration.Inf)
+
+          f.map { res =>
+            l.info("Extraction and Load done. The database should contain {} rows.", res.toString)
+          }
+
+          l.info("Program finished. Shutting down...")
+
+        case _ =>
       }
 
-      // Reduce futures
-      res.map(Future.sequence(_))
-
-      val f: Future[Long] = ref ? Report
-
-      Await.ready(f, Duration.Inf)
-
-      f.map { res =>
-        l.info("Extraction and Load done. The database should contain {} rows.", res.toString)
-      }
-
-      l.info("Program finished. Shutting down...")
-
+      // End program
       connection.close()
       System.exit(0)
 

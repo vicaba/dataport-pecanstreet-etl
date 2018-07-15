@@ -1,9 +1,11 @@
 package lasalle.dataportpecanstreet
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 import com.typesafe.config.{ConfigFactory, Config => Conf}
 
 import scala.collection.JavaConverters._
-import scala.util.Try
 
 object Config {
 
@@ -27,24 +29,32 @@ object Config {
   }
 
   object Etl {
-    val EtlKey = "etl"
-    val ExtractKey = "extract"
-    val LoadKey = "load"
+    val EtlKey: String = "etl"
+    val ExtractKey: String = "extract"
+    val LoadKey: String = "load"
+
+    private def localDateTimeFromString(str: String): LocalDateTime = {
+      val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+      LocalDateTime.parse(str, formatter)
+    }
 
     object Extract {
-      val Key = s"$EtlKey.$ExtractKey"
-      val from: Set[String] = config.getStringList(s"$Key.from").asScala.toSet
+      val Key: String = s"$EtlKey.$ExtractKey"
+      val from: String = config.getString(s"$Key.from")
       val batchInterval: Long = config.getLong(s"$Key.batchInterval")
+      val fromTimestamp: LocalDateTime = localDateTimeFromString(config.getString(s"$Key.fromTimestamp"))
+      val toTimestamp: LocalDateTime = localDateTimeFromString(config.getString(s"$Key.toTimestamp"))
     }
 
     object Load {
-      val Key = s"$EtlKey.$LoadKey"
-      val metadata: Boolean =  config.getBoolean(s"$Key.metadata")
+      val Key: String = s"$EtlKey.$LoadKey"
+      val to: String = config.getString(s"$Key.to")
+      val metadata: Boolean = config.getBoolean(s"$Key.metadata")
     }
 
   }
 
   def execute[R](b: => Boolean)(default: R)(f: => R): R =
-    if (b()) f() else default
+    if (b) f else default
 
 }

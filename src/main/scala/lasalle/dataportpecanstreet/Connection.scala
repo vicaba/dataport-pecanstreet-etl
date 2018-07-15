@@ -26,7 +26,7 @@ object Connection {
           case f @ Failure(e) =>
             e.printStackTrace(System.err)
             f
-          case s: _ => s
+          case s => s
         }
     }
   }

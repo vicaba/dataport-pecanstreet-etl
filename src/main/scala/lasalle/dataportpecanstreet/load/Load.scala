@@ -12,26 +12,26 @@ import scala.concurrent.Future
 
 object Load {
 
-  def loadMetadata(tableMetadata: TableMetadata): Future[WriteResult] = {
+  def loadMetadata(tableMetadata: TableMetadata, toTableName: String): Future[WriteResult] = {
     Config.execute[Future[WriteResult]](Config.Etl.Load.metadata)(Future(DefaultWriteResult(ok = true, 0, Seq.empty, None, None, None))) {
 
-      val collection: BSONCollection = MongoEnvironment.mainDb.collection(tableMetadata.table + "_metadata")
+      val collection: BSONCollection = MongoEnvironment.mainDb.collection(toTableName + "_metadata")
       collection.insert(Transform.columnsMetadataToBson(tableMetadata.metadata))
 
     }
   }
 
-  def load(tableMetadata: TableMetadata, row: TableData.Row): Future[WriteResult] = {
+  def load(tableMetadata: TableMetadata, row: TableData.Row, toTableName: String): Future[WriteResult] = {
 
-    val collection: BSONCollection = MongoEnvironment.mainDb.collection(tableMetadata.table)
+    val collection: BSONCollection = MongoEnvironment.mainDb.collection(toTableName)
     collection.insert(
       Transform.rowToBsonDocument(row)(tableMetadata)
     )
   }
 
-  def load(tableMetadata: TableMetadata, tableData: TableData.Rows): Future[MultiBulkWriteResult] = {
+  def load(tableMetadata: TableMetadata, tableData: TableData.Rows, toTableName: String): Future[MultiBulkWriteResult] = {
 
-    val collection: BSONCollection = MongoEnvironment.mainDb.collection(tableMetadata.table)
+    val collection: BSONCollection = MongoEnvironment.mainDb.collection(toTableName)
 
     val bulkDocs = Transform.rowsToBsonDocument(tableData)(tableMetadata)
       .map(implicitly[collection.ImplicitlyDocumentProducer](_))
