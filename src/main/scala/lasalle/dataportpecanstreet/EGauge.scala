@@ -22,7 +22,7 @@ object EGauge {
 
       val egaugeAppliancesQueryPart = appliances.mkString("", " = 'yes' or ", " = 'yes'")
 
-      val enrolledDataidsQuery = s"""select dataid from ${Config.PostgreSqlServer.schema}.metadata where date_enrolled < '01-01-2014' and date_withdrawn > '01-02-2014' and ($egaugeAppliancesQueryPart)"""
+      val enrolledDataidsQuery = s"""select dataid from ${Config.PostgreSqlServer.schema}.metadata where date_enrolled < '2015-01-01' and date_withdrawn > '2015-01-02' and ($egaugeAppliancesQueryPart)"""
 
       val enrolledDataidsResultSet = connection.createStatement().executeQuery(enrolledDataidsQuery)
 
@@ -32,18 +32,33 @@ object EGauge {
 
       val selectDataidsQueryPart = dataids.mkString("dataid = ", " or dataid = ", "")
 
-      val egaugeDataQuery = s"""select dataid, ${appliances.mkString(", ")} , localhour from  ${Config.PostgreSqlServer.schema}.electricity_egauge_hours where localhour between '01-01-2014' and '01-02-2014' and ($selectDataidsQueryPart) order by dataid, localhour"""
+      val egaugeDataQuery = s"""select dataid, ${appliances.mkString(", ")} , localhour from  ${Config.PostgreSqlServer.schema}.electricity_egauge_hours where localhour between '2015-01-01' and '2015-01-01 23:59:00' and ($selectDataidsQueryPart) order by dataid, localhour"""
 
-      val egaugeDataResultSet = connection.createStatement().executeQuery(egaugeDataQuery)
 
-      val dataIdList = dataids.map(_ -> Map.empty[String, BigDecimal])
+      val egaugeData = dataids.map { dataId =>
 
-      val result = iterateOverResultSet(egaugeDataResultSet, dataIdList, (rs, accum: List[(Int, Map[String, BigDecimal])]) => {
-        accum :+ (rs.getInt("dataid") -> appliances.map { appliance =>
-          Option(rs.getBigDecimal(appliance)).fold(appliance -> BigDecimal(0))(v => appliance -> v)
-        }.toMap)
-      })
+        val _egaugeDataQuery = s"""select dataid, ${appliances.mkString(", ")} , localhour from  ${Config.PostgreSqlServer.schema}.electricity_egauge_hours where localhour between '2015-01-01' and '2015-01-01 23:59:00' and dataid = $dataId order by localhour"""
 
+
+        val rs = connection.createStatement().executeQuery(_egaugeDataQuery)
+
+        val appliancesPerDataId = iterateOverResultSet(rs, List.empty[Map[String, BigDecimal]], (_rs, accum: List[Map[String, BigDecimal]]) => {
+          assert(dataId == _rs.getInt("dataid"))
+          val appliancesAtTime = appliances.map { appliance =>
+            appliance -> Option(_rs.getBigDecimal(appliance)).fold(BigDecimal(0))(v => v)
+          }.toMap
+          accum :+ appliancesAtTime
+        })
+
+        val appliancesPerDataIdTransposed = appliances.map { appliance =>
+          appliance -> appliancesPerDataId.map { m =>
+            m.getOrElse(appliance, BigDecimal(0))
+          }
+        }
+
+        dataId -> appliancesPerDataIdTransposed
+
+      }.toMap
 
       print("a")
 
