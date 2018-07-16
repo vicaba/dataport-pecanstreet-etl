@@ -9,7 +9,7 @@ import scala.collection.JavaConverters._
 
 object Config {
 
-  val config: Conf = ConfigFactory.load()
+    val config: Conf = ConfigFactory.load()
 
   object Credentials {
     val username: String = config.getString("SQL.username")

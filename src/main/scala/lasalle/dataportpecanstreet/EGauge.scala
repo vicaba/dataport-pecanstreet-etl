@@ -18,17 +18,31 @@ object EGauge {
   def main(args: Array[String]): Unit = {
     lasalle.dataportpecanstreet.Connection.connect().map { connection =>
 
-      val query = s"""select dataid from ${Config.PostgreSqlServer.schema}.metadata where date_enrolled > '01-01-2013' and date_withdrawn > '02-01-2013' and (winecooler1 = 'yes' or pool1 = 'yes' or lights_plugs4 = 'yes' or icemaker1 = 'yes' or bedroom1 = 'yes' or bathroom1 = 'yes' or freezer1 = 'yes' or furnace1 = 'yes' or livingroom1 = 'yes' or air1 = 'yes' or security1 = 'yes' or refrigerator1 = 'yes' or lights_plugs3 = 'yes' or oven2 = 'yes' or lights_plugs5 = 'yes' or garage1 = 'yes' or range1 = 'yes' or bedroom2 = 'yes' or waterheater2 = 'yes' or bathroom2 = 'yes' or air3 = 'yes' or kitchen1 = 'yes' or disposal1 = 'yes' or office1 = 'yes' or car1 = 'yes' or venthood1 = 'yes' or diningroom2 = 'yes' or lights_plugs2 = 'yes' or bedroom5 = 'yes' or aquarium1 = 'yes' or outsidelights_plugs1 = 'yes' or outsidelights_plugs2 = 'yes' or poolpump1 = 'yes' or grid = 'yes' or oven1 = 'yes' or clotheswasher1 = 'yes' or waterheater1 = 'yes' or kitchen2 = 'yes' or lights_plugs6 = 'yes' or bedroom3 = 'yes' or dryg1 = 'yes' or drye1 = 'yes' or refrigerator2 = 'yes' or kitchenapp1 = 'yes' or pool2 = 'yes' or lights_plugs1 = 'yes' or utilityroom1 = 'yes' or clotheswasher_dryg1 = 'yes' or dishwasher1 = 'yes' or heater1 = 'yes' or diningroom1 = 'yes' or airwindowunit1 = 'yes' or poollight1 = 'yes' or furnace2 = 'yes' or livingroom2 = 'yes' or microwave1 = 'yes' or sprinkler1 = 'yes' or kitchenapp2 = 'yes' or housefan1 = 'yes' or jacuzzi1 = 'yes' or bedroom4 = 'yes' or shed1 = 'yes' or air2 = 'yes' or garage2 = 'yes' or pump1 = 'yes')"""
+      val appliances = "winecooler1,pool1,lights_plugs4,icemaker1,bedroom1,bathroom1,freezer1,furnace1,livingroom1,air1,security1,refrigerator1,lights_plugs3,oven2,lights_plugs5,garage1,range1,bedroom2,waterheater2,bathroom2,air3,kitchen1,disposal1,office1,car1,venthood1,diningroom2,lights_plugs2,bedroom5,aquarium1,outsidelights_plugs1,outsidelights_plugs2,poolpump1,grid,oven1,clotheswasher1,waterheater1,kitchen2,lights_plugs6,bedroom3,dryg1,drye1,refrigerator2,kitchenapp1,pool2,lights_plugs1,utilityroom1,clotheswasher_dryg1,dishwasher1,heater1,use,diningroom1,airwindowunit1,poollight1,furnace2,livingroom2,microwave1,sprinkler1,kitchenapp2,housefan1,jacuzzi1,bedroom4,shed1,air2,garage2,gen,pump1".split(",")
 
-      val statement = connection.createStatement()
+      val egaugeAppliancesQueryPart = appliances.mkString("", " = 'yes' or ", " = 'yes'")
 
-      val resultSet = statement.executeQuery(query)
+      val enrolledDataidsQuery = s"""select dataid from ${Config.PostgreSqlServer.schema}.metadata where date_enrolled < '01-01-2014' and date_withdrawn > '01-02-2014' and ($egaugeAppliancesQueryPart)"""
 
-      val dataids = iterateOverResultSet(resultSet, List.empty[Int], (rs, accum: List[Int]) => {
+      val enrolledDataidsResultSet = connection.createStatement().executeQuery(enrolledDataidsQuery)
+
+      val dataids = iterateOverResultSet(enrolledDataidsResultSet, List.empty[Int], (rs, accum: List[Int]) => {
         rs.getInt("dataid") +: accum
       })
 
-      val queryDataids = dataids.mkString("""dataid = """", """" or dataid = """", """"""")
+      val selectDataidsQueryPart = dataids.mkString("dataid = ", " or dataid = ", "")
+
+      val egaugeDataQuery = s"""select dataid, ${appliances.mkString(", ")} , localhour from  ${Config.PostgreSqlServer.schema}.electricity_egauge_hours where localhour between '01-01-2014' and '01-02-2014' and ($selectDataidsQueryPart) order by dataid, localhour"""
+
+      val egaugeDataResultSet = connection.createStatement().executeQuery(egaugeDataQuery)
+
+      val dataIdList = dataids.map(_ -> Map.empty[String, BigDecimal])
+
+      val result = iterateOverResultSet(egaugeDataResultSet, dataIdList, (rs, accum: List[(Int, Map[String, BigDecimal])]) => {
+        accum :+ (rs.getInt("dataid") -> appliances.map { appliance =>
+          Option(rs.getBigDecimal(appliance)).fold(appliance -> BigDecimal(0))(v => appliance -> v)
+        }.toMap)
+      })
 
 
       print("a")
