@@ -1,8 +1,10 @@
 package lasalle.dataportpecanstreet
 
+import java.io.PrintWriter
 import java.sql.ResultSet
 
 import lasalle.dataportpecanstreet.extract.Extract.iterateOverResultSet
+import play.api.libs.json.Json
 
 import scala.annotation.tailrec
 
@@ -35,19 +37,20 @@ object EGauge {
       val egaugeDataQuery = s"""select dataid, ${appliances.mkString(", ")} , localhour from  ${Config.PostgreSqlServer.schema}.electricity_egauge_hours where localhour between '2015-01-01' and '2015-01-01 23:59:00' and ($selectDataidsQueryPart) order by dataid, localhour"""
 
 
-      val egaugeData = dataids.map { dataId =>
+      val egaugeData = dataids.flatMap { dataId =>
 
         val _egaugeDataQuery = s"""select dataid, ${appliances.mkString(", ")} , localhour from  ${Config.PostgreSqlServer.schema}.electricity_egauge_hours where localhour between '2015-01-01' and '2015-01-01 23:59:00' and dataid = $dataId order by localhour"""
 
 
         val rs = connection.createStatement().executeQuery(_egaugeDataQuery)
 
-        val appliancesPerDataId = iterateOverResultSet(rs, List.empty[Map[String, BigDecimal]], (_rs, accum: List[Map[String, BigDecimal]]) => {
+        val (rowCount, appliancesPerDataId) = iterateOverResultSet(rs, (0, List.empty[Map[String, BigDecimal]]), (_rs, accum: (Int, List[Map[String, BigDecimal]])) => {
           assert(dataId == _rs.getInt("dataid"))
           val appliancesAtTime = appliances.map { appliance =>
             appliance -> Option(_rs.getBigDecimal(appliance)).fold(BigDecimal(0))(v => v)
           }.toMap
-          accum :+ appliancesAtTime
+
+          (accum._1 + 1, accum._2 :+ appliancesAtTime)
         })
 
         val appliancesPerDataIdTransposed = appliances.map { appliance =>
@@ -56,9 +59,22 @@ object EGauge {
           }
         }
 
-        dataId -> appliancesPerDataIdTransposed
+        if (rowCount == 0) None else Some(dataId -> appliancesPerDataIdTransposed)
 
       }.toMap
+
+      print(s"size: ${egaugeData.size}")
+
+      Some(new PrintWriter("files/output/egauge.json")).foreach { p =>
+        val jsonList = egaugeData.map { egaugeDataPerDataId =>
+          Json.obj(
+            "dataid" -> egaugeDataPerDataId._1,
+            "data" -> egaugeDataPerDataId._2.map(_._2)
+          )
+        }
+        p.write(Json.prettyPrint(Json.toJson(jsonList)).toString())
+        p.close()
+      }
 
       print("a")
 
